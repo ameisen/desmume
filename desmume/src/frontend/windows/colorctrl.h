@@ -19,7 +19,7 @@
 #ifndef COLORCTRL_H
 #define COLORCTRL_H
 
-#include <windows.h>
+#include "Platforms/common.h"
 
 typedef struct
 {

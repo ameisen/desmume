@@ -19,7 +19,7 @@
 #ifndef CWINDOW_H
 #define CWINDOW_H
 
-#include <windows.h>
+#include "Platforms/common.h"
 
 #include <commctrl.h>
 #include <string>
@@ -29,7 +29,10 @@
 
 #include "types.h"
 
-using namespace std;
+using
+	std::string,
+	std::map,
+	std::pair;
 
 extern CRITICAL_SECTION win_execute_sync;
 
@@ -104,13 +107,13 @@ public:
 	// Creates a window using CreateWindow().
 	// If the window creation failed for whatever reason,
 	// hWnd will be NULL.
-	CToolWindow(char* className, WNDPROC proc, char* title, int width, int height);
+	CToolWindow(const char* className, WNDPROC proc, const char* title, int width, int height);
 
 	// CToolWindow constructor #2
 	// Creates a window from a dialog template resource.
 	// If the window creation failed for whatever reason,
 	// hWnd will be NULL.
-	CToolWindow(int ID, DLGPROC proc, char* title);
+	CToolWindow(int ID, DLGPROC proc, const char* title);
 
 	// CToolWindow destructor
 	// Dummy destructor. The derivated toolwindow classes must 
@@ -128,7 +131,7 @@ public:
 
 	// SetTitle()
 	// Changes the title of the window.
-	void SetTitle(char* title) { SetWindowText(hWnd, title); }
+	void SetTitle(const char* title) { SetWindowText(hWnd, title); }
 
 	// Refresh()
 	// Refreshes the window. Called by RefreshAllToolWindows().
@@ -148,7 +151,7 @@ private:
 	int ID;
 	DLGPROC proc;
 	std::string title;
-	char* className;
+	const char* className;
 	int width, height;
 	int whichInit;
 };
@@ -230,7 +233,7 @@ private:
 	char		regclass[256];
 	int minWidth, minHeight;
 public:
-	WINCLASS(LPSTR rclass, HINSTANCE hInst);
+	WINCLASS(LPCSTR rclass, HINSTANCE hInst);
 	~WINCLASS();
 
 	bool create(LPSTR caption, int x, int y, int width, int height, int style, 
@@ -305,7 +308,7 @@ public:
 	virtual ~TOOLSCLASS();
 	bool open(bool useThread=true);
 	bool close();
-	void regClass(LPSTR class_name, WNDPROC wproc, bool SecondReg = false);
+	void regClass(LPCSTR class_name, WNDPROC wproc, bool SecondReg = false);
 	void unregClass();
 	bool IsOpen() { return isOpen; }
 	void doClose();

@@ -19,7 +19,7 @@
 #include "winutil.h"
 #include <stdio.h>
 #include <string.h>
-#include <windows.h>
+#include "Platforms/common.h"
 #include <windef.h>
 #include <ShlObj.h>
 
@@ -101,7 +101,7 @@ void PreventScreensaver()
 	SendInput(1,&fakeMouse,sizeof(INPUT));
 }
 
-void WritePrivateProfileBool(char* appname, char* keyname, bool val, char* file)
+void WritePrivateProfileBool(const char* appname, const char* keyname, bool val, char* file)
 {
 	char temp[256] = "";
 	sprintf(temp, "%d", val?1:0);
@@ -113,7 +113,7 @@ bool GetPrivateProfileBool(const char* appname, const char* keyname, bool defval
 	return GetPrivateProfileInt(appname,keyname,defval?1:0,filename) != 0;
 }
 
-void WritePrivateProfileInt(char* appname, char* keyname, int val, char* file)
+void WritePrivateProfileInt(const char* appname, const char* keyname, int val, char* file)
 {
 	char temp[256] = "";
 	sprintf(temp, "%d", val);

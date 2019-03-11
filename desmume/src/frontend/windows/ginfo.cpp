@@ -286,7 +286,7 @@ LRESULT GInfo_IconBoxPaint(HWND hCtl, WPARAM wParam, LPARAM lParam)
 	}
 	else
 	{
-		char *noicon = "No icon";
+		const char *noicon = "No icon";
 		GetTextExtentPoint32(mem_hdc, noicon, strlen(noicon), &fontsize);
 		TextOut(mem_hdc, ((w/2) - (fontsize.cx/2)), ((h/2) - (fontsize.cy/2)), noicon, strlen(noicon));
 	}

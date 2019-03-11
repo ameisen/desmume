@@ -19,7 +19,7 @@
 #define __GBASLOT_CONFIG_H_
 
 #include <string>
-#include <windows.h>
+#include "Platforms/common.h"
 
 extern std::string win32_CFlash_cfgDirectory, win32_CFlash_cfgFileName;
 extern UINT win32_CFlash_cfgMode;

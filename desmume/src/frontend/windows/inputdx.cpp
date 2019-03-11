@@ -35,7 +35,6 @@
 #if (((defined(_MSC_VER) && _MSC_VER >= 1300)) || defined(__MINGW32__))
 	// both MINGW and VS.NET use fstream instead of fstream.h which is deprecated
 	#include <fstream>
-	using namespace std;
 #else
 	// for VC++ 6
 	#include <fstream.h>
@@ -474,7 +473,7 @@ static void LoadInputConfig()
 	killStylusOffScreen = GetPrivateProfileInt("Controls","KillStylusOffScreen",0,IniName) != 0;
 }
 
-static void WriteControl(char* name, WORD val)
+static void WriteControl(const char* name, WORD val)
 {
 	WritePrivateProfileInt("Controls",name,val,IniName);
 }

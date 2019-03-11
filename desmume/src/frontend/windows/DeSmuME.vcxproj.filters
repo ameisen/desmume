@@ -136,6 +136,12 @@
     <Filter Include="libretro-common\include\encodings">
       <UniqueIdentifier>{c3763fed-6836-4ede-be25-d6d35bbad418}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platforms">
+      <UniqueIdentifier>{44086f47-7ca7-4837-b4a6-27be7d8b84c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platforms\Windows">
+      <UniqueIdentifier>{f63455fb-a2e6-4093-946f-e1b0789fad81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\addons\slot2_expMemory.cpp">
@@ -930,6 +936,7 @@
     <ClCompile Include="display.cpp">
       <Filter>frontend\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="desmume.pch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\utils\guid.h">
@@ -1628,6 +1635,13 @@
     <ClInclude Include="display.h">
       <Filter>frontend\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="Platforms\common.h">
+      <Filter>Platforms</Filter>
+    </ClInclude>
+    <ClInclude Include="Platforms\Windows\common.h">
+      <Filter>Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="desmume.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bitmap1.bmp">
@@ -1707,6 +1721,7 @@
     </None>
     <None Include="..\instruction_tabdef.inc" />
     <None Include="..\thumb_tabdef.inc" />
+    <None Include="desmume" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc">

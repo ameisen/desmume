@@ -17,7 +17,7 @@
 
 #include "sndxa2.h"
 #include "directx/XAudio2.h"
-#include <windows.h>
+#include "Platforms/common.h"
 
 #include "types.h"
 #include "windriver.h"

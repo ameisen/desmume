@@ -19,7 +19,7 @@
 #ifndef HOTKEY_H_INCLUDED
 #define HOTKEY_H_INCLUDED
 
-#include <windows.h>
+#include "Platforms/common.h"
 #include <tchar.h>
 #include <string>
 #include "types.h"

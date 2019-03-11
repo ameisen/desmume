@@ -18,7 +18,9 @@
 #ifndef _WINDRIVER_H_
 #define _WINDRIVER_H_
 
-#define WIN32_LEAN_AND_MEAN
+#ifndef WIN32_LEAN_AND_MEAN
+#	define WIN32_LEAN_AND_MEAN
+#endif
 #include "common.h"
 #include "CWindow.h"
 

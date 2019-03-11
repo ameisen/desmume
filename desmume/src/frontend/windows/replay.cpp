@@ -17,8 +17,7 @@
 
 #include "replay.h"
 
-#include <windows.h>
-#include <commdlg.h>
+#include "Platforms/common.h"
 #include <io.h>
 #include <fstream>
 #include <time.h>

@@ -18,7 +18,7 @@
 
 #include "CWindow.h"
 
-#include <windows.h>
+#include "Platforms/common.h"
 #include <windowsx.h>
 #include <commctrl.h>
 
@@ -29,6 +29,9 @@
 #include "IORegView.h"
 #include "windriver.h"
 
+using 
+	std::string,
+	std::vector;
 
 extern bool fsWindow;
 
@@ -186,7 +189,7 @@ void UnregWndClass(string name)
 // Base toolwindow class
 //-----------------------------------------------------------------------------
 
-CToolWindow::CToolWindow(char* _className, WNDPROC _proc, char* _title, int _width, int _height)
+CToolWindow::CToolWindow(const char* _className, WNDPROC _proc, const char* _title, int _width, int _height)
 	: hWnd(NULL)
 	, className(_className)
 	, proc((DLGPROC)_proc)
@@ -197,7 +200,7 @@ CToolWindow::CToolWindow(char* _className, WNDPROC _proc, char* _title, int _wid
 {
 }
 
-CToolWindow::CToolWindow(int _ID, DLGPROC _proc, char* _title)
+CToolWindow::CToolWindow(int _ID, DLGPROC _proc, const char* _title)
 	: hWnd(NULL)
 	, ID(_ID)
 	, proc(_proc)
@@ -540,7 +543,7 @@ int CToolBar::GetHeight()
 }
 
 
-WINCLASS::WINCLASS(LPSTR rclass, HINSTANCE hInst)
+WINCLASS::WINCLASS(LPCSTR rclass, HINSTANCE hInst)
 {
 	memset(regclass, 0, sizeof(regclass));
 	memcpy(regclass, rclass, strlen(rclass));
@@ -894,7 +897,7 @@ DWORD TOOLSCLASS::ThreadFunc()
 	return 0;
 }
 
-void TOOLSCLASS::regClass(LPSTR class_name, WNDPROC wproc, bool SecondReg)
+void TOOLSCLASS::regClass(LPCSTR class_name, WNDPROC wproc, bool SecondReg)
 {
 	WNDCLASSEX	wc;
 

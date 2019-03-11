@@ -47,7 +47,7 @@
 #endif
 
 #ifdef SLEEP_HACK_2011
-#include <Windows.h>
+#include "Platforms/common.h"
 #endif
 
 #ifndef _MSC_VER 

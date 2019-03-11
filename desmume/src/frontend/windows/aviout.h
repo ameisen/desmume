@@ -18,10 +18,7 @@
 #ifndef _AVIOUT_H_
 #define _AVIOUT_H_
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <Commdlg.h>
-#include <Shellapi.h>
+#include "Platforms/common.h"
 
 #include <vfw.h>
 

@@ -55,7 +55,8 @@
 #include "WavFile.h"
 #include "STTypes.h"
 
-using namespace std;
+using std::string;
+using std::stringstream;
 
 static const char riffStr[] = "RIFF";
 static const char waveStr[] = "WAVE";

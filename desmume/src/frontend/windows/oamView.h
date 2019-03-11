@@ -18,7 +18,7 @@
 #ifndef OAMVIEW_H
 #define OAMVIEW_H
 
-#include <windows.h>
+#include "Platforms/common.h"
 
 extern LRESULT CALLBACK ViewOAMBoxProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 extern BOOL CALLBACK ViewOAMProc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);

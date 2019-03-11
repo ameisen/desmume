@@ -18,7 +18,7 @@
 #ifndef PALVIEW_H
 #define PALVIEW_H
 
-#include <windows.h>
+#include "Platforms/common.h"
 
 extern BOOL CALLBACK ViewPalProc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
  

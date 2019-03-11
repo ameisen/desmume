@@ -35,7 +35,7 @@
 #include "saves.h"
 
 #ifdef _MSC_VER
-#include <Windows.h>
+#	include "Platforms/common.h"
 #else
 #include <sys/time.h>
 #endif

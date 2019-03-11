@@ -18,7 +18,7 @@
 #ifndef TILEVIEW_H
 #define TILEVIEW_H
 
-#include <windows.h>
+#include "Platforms/common.h"
 
 extern LRESULT CALLBACK TileViewBoxProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 extern LRESULT CALLBACK MiniTileViewBoxProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);

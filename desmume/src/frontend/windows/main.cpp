@@ -30,10 +30,8 @@
 #include <Winnls.h>
 #include <windowsx.h>
 #include <mmsystem.h>
-#include <shellapi.h>
 #include <shlwapi.h>
 #include <commctrl.h>
-#include <commdlg.h>
 #include <tchar.h>
 #include <stdio.h>
 
@@ -248,7 +246,8 @@
 //} 
 //}
 
-using namespace std;
+using std::string;
+using std::wstring;
 
 //====================== Message box
 #define MSG_ARG \
@@ -319,6 +318,8 @@ extern bool killStylusOffScreen;
 extern LRESULT CALLBACK RamSearchProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
 void InitRamSearch();
 void FilterUpdate(HWND hwnd, bool user=true);
+
+int GetInitialModifiers(int key);
 
 CRITICAL_SECTION win_execute_sync;
 volatile int win_sound_samplecounter = 0;
@@ -2025,7 +2026,7 @@ int _main()
 	CommonSettings.gamehacks.en = GetPrivateProfileBool("Emulation", "GameHacks", true, IniName);
 	CommonSettings.GFX3D_Renderer_TextureDeposterize =  GetPrivateProfileBool("3D", "TextureDeposterize", 0, IniName);
 	CommonSettings.GFX3D_Renderer_TextureSmoothing =  GetPrivateProfileBool("3D", "TextureSmooth", 0, IniName);
-	gpu_bpp = GetValid3DIntSetting("GpuBpp", 18, possibleBPP, 3);
+	gpu_bpp = GetValid3DIntSetting("GpuBpp"_winstring, 18, possibleBPP, 3);
 	lostFocusPause = GetPrivateProfileBool("Focus", "BackgroundPause", false, IniName);
 
 	//Get Ram-Watch values
@@ -2269,7 +2270,7 @@ int _main()
 	else
 		wifiHandler->SetEmulationLevel(WifiEmulationLevel_Off);
 	
-	CommonSettings.GFX3D_Renderer_TextureScalingFactor = (cmdline.texture_upscale != -1) ? cmdline.texture_upscale : GetValid3DIntSetting("TextureScalingFactor", 1, possibleTexScale, 3);
+	CommonSettings.GFX3D_Renderer_TextureScalingFactor = (cmdline.texture_upscale != -1) ? cmdline.texture_upscale : GetValid3DIntSetting("TextureScalingFactor"_winstring, 1, possibleTexScale, 3);
 	int newPrescaleHD = (cmdline.gpu_resolution_multiplier != -1) ? cmdline.gpu_resolution_multiplier : GetPrivateProfileInt("3D", "PrescaleHD", 1, IniName);
 	video.SetPrescale(newPrescaleHD, 1);
 	GPU->SetCustomFramebufferSize(GPU_FRAMEBUFFER_NATIVE_WIDTH*video.prescaleHD, GPU_FRAMEBUFFER_NATIVE_HEIGHT*video.prescaleHD);
@@ -2376,7 +2377,7 @@ int _main()
 	CommonSettings.OpenGL_Emulation_SpecialZeroAlphaBlending = GetPrivateProfileBool("3D", "EnableSpecialZeroAlphaBlending", 1, IniName);
 	CommonSettings.OpenGL_Emulation_NDSDepthCalculation = GetPrivateProfileBool("3D", "EnableNDSDepthCalculation", 1, IniName);
 	CommonSettings.OpenGL_Emulation_DepthLEqualPolygonFacing = GetPrivateProfileBool("3D", "EnableDepthLEqualPolygonFacing", 0, IniName); // Default is off.
-	CommonSettings.GFX3D_Renderer_MultisampleSize = GetValid3DIntSetting("MultisampleSize", 0, possibleMSAA, 6);
+	CommonSettings.GFX3D_Renderer_MultisampleSize = GetValid3DIntSetting("MultisampleSize"_winstring, 0, possibleMSAA, 6);
 	Change3DCoreWithFallbackAndSave(cur3DCore);
 
 
@@ -5625,28 +5626,28 @@ DOKEYDOWN:
 						switch (ttt->hdr.idFrom)
 						{
 						case IDM_OPEN:
-							if (RecentRoms.empty()) ttt->lpszText = "Open a ROM";
-							else ttt->lpszText = "Open a ROM\nClick the arrow to open a recent ROM"; break;
+							if (RecentRoms.empty()) ttt->lpszText = "Open a ROM"_winstring;
+							else ttt->lpszText = "Open a ROM\nClick the arrow to open a recent ROM"_winstring; break;
 
 						case IDM_PAUSE:
-							if (paused) ttt->lpszText = "Resume emulation";
-							else ttt->lpszText = "Pause emulation"; break;
+							if (paused) ttt->lpszText = "Resume emulation"_winstring;
+							else ttt->lpszText = "Pause emulation"_winstring; break;
 
-						case IDM_CLOSEROM: ttt->lpszText = "Stop emulation"; break;
-						case IDM_RESET: ttt->lpszText = "Reset emulation"; break;
+						case IDM_CLOSEROM: ttt->lpszText = "Stop emulation"_winstring; break;
+						case IDM_RESET: ttt->lpszText = "Reset emulation"_winstring; break;
 
 						case IDC_ROTATE0:
-							if (video.rotation == 90) ttt->lpszText = "Rotate CCW";
-							else if (video.rotation == 270) ttt->lpszText = "Rotate CW"; break;
+							if (video.rotation == 90) ttt->lpszText = "Rotate CCW"_winstring;
+							else if (video.rotation == 270) ttt->lpszText = "Rotate CW"_winstring; break;
 						case IDC_ROTATE90:
-							if (video.rotation == 180) ttt->lpszText = "Rotate CCW";
-							else if (video.rotation == 0) ttt->lpszText = "Rotate CW"; break;
+							if (video.rotation == 180) ttt->lpszText = "Rotate CCW"_winstring;
+							else if (video.rotation == 0) ttt->lpszText = "Rotate CW"_winstring; break;
 						case IDC_ROTATE180:
-							if (video.rotation == 270) ttt->lpszText = "Rotate CCW";
-							else if (video.rotation == 90) ttt->lpszText = "Rotate CW"; break;
+							if (video.rotation == 270) ttt->lpszText = "Rotate CCW"_winstring;
+							else if (video.rotation == 90) ttt->lpszText = "Rotate CW"_winstring; break;
 						case IDC_ROTATE270:
-							if (video.rotation == 0) ttt->lpszText = "Rotate CCW";
-							else if (video.rotation == 180) ttt->lpszText = "Rotate CW"; break;
+							if (video.rotation == 0) ttt->lpszText = "Rotate CCW"_winstring;
+							else if (video.rotation == 180) ttt->lpszText = "Rotate CW"_winstring; break;
 						}
 					}
 					return 0;

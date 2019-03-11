@@ -26,6 +26,8 @@
 #include "winutil.h"
 #include "utils/xstring.h"
 
+using std::vector, std::string;
+
 std::vector<std::string> RecentRoms;					//The list of recent ROM filenames
 HMENU recentromsmenu;				//Handle to the recent ROMs submenu
 
@@ -70,7 +72,7 @@ void PopulateRecentRomsMenu()
 		moo.cch = 5;
 		moo.fType = 0;
 		moo.wID = recentRoms_baseid;
-		moo.dwTypeData = "None";
+		moo.dwTypeData = "None"_winstring;
 		moo.fState = MF_GRAYED;
 
 		InsertMenuItem(GetSubMenu(recentromsmenu, 0), 0, TRUE, &moo);

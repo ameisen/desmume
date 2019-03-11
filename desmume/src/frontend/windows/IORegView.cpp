@@ -28,6 +28,8 @@
 #include "resource.h"
 #include "main.h"
 
+using std::min, std::max;
+
 //this message is only supported in vista so folks sdk might not have it.
 //therefore we shall declare it here
 #ifndef RB_SETBANDWIDTH
@@ -450,17 +452,17 @@ void IORegView_Paint(CIORegView* wnd, HWND hWnd, WPARAM wParam, LPARAM lParam)
 		cury ++;
 
 		curx = kXMargin;
-		DrawText(hMemDC, "Address", curx, cury+kYMargin, fontsize.cx*8, fontsize.cy, DT_LEFT);
+		DrawText(hMemDC, "Address"_winstring, curx, cury+kYMargin, fontsize.cx*8, fontsize.cy, DT_LEFT);
 		curx += (fontsize.cx*8) + kXMargin;
 		MoveToEx(hMemDC, curx, cury, NULL);
 		LineTo(hMemDC, curx, h);
 		curx += 1 + kXMargin;
-		DrawText(hMemDC, "Name", curx, cury+kYMargin, nameColWidth, fontsize.cy, DT_LEFT | DT_END_ELLIPSIS);
+		DrawText(hMemDC, "Name"_winstring, curx, cury+kYMargin, nameColWidth, fontsize.cy, DT_LEFT | DT_END_ELLIPSIS);
 		curx += nameColWidth + kXMargin;
 		MoveToEx(hMemDC, curx, cury, NULL);
 		LineTo(hMemDC, curx, h);
 		curx += 1 + kXMargin;
-		DrawText(hMemDC, "Value", curx, cury+kYMargin, fontsize.cx*8, fontsize.cy, DT_RIGHT);
+		DrawText(hMemDC, "Value"_winstring, curx, cury+kYMargin, fontsize.cx*8, fontsize.cy, DT_RIGHT);
 
 		cury += kYMargin + fontsize.cy + kYMargin;
 		MoveToEx(hMemDC, 0, cury, NULL);
@@ -549,17 +551,17 @@ void IORegView_Paint(CIORegView* wnd, HWND hWnd, WPARAM wParam, LPARAM lParam)
 		cury ++;
 
 		curx = kXMargin;
-		DrawText(hMemDC, "Bits", curx, cury+kYMargin, fontsize.cx*8, fontsize.cy, DT_LEFT);
+		DrawText(hMemDC, "Bits"_winstring, curx, cury+kYMargin, fontsize.cx*8, fontsize.cy, DT_LEFT);
 		curx += (fontsize.cx*8) + kXMargin;
 		MoveToEx(hMemDC, curx, cury, NULL);
 		LineTo(hMemDC, curx, h);
 		curx += 1 + kXMargin;
-		DrawText(hMemDC, "Description", curx, cury+kYMargin, nameColWidth, fontsize.cy, DT_LEFT | DT_END_ELLIPSIS);
+		DrawText(hMemDC, "Description"_winstring, curx, cury+kYMargin, nameColWidth, fontsize.cy, DT_LEFT | DT_END_ELLIPSIS);
 		curx += nameColWidth + kXMargin;
 		MoveToEx(hMemDC, curx, cury, NULL);
 		LineTo(hMemDC, curx, h);
 		curx += 1 + kXMargin;
-		DrawText(hMemDC, "Value", curx, cury+kYMargin, fontsize.cx*8, fontsize.cy, DT_RIGHT);
+		DrawText(hMemDC, "Value"_winstring, curx, cury+kYMargin, fontsize.cx*8, fontsize.cy, DT_RIGHT);
 
 		cury += kYMargin + fontsize.cy + kYMargin;
 		MoveToEx(hMemDC, 0, cury, NULL);
@@ -665,7 +667,7 @@ LRESULT CALLBACK IORegView_Proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 			rbBand.fStyle = RBBS_CHILDEDGE | RBBS_NOGRIPPER;
 
 			GetWindowRect(wnd->hCPUCombo, &rc);
-			rbBand.lpText = "CPU: ";
+			rbBand.lpText = "CPU: "_winstring;
 			rbBand.hwndChild = wnd->hCPUCombo;
 			rbBand.cxMinChild = 0;
 			rbBand.cyMinChild = rc.bottom - rc.top;
@@ -673,7 +675,7 @@ LRESULT CALLBACK IORegView_Proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 			SendMessage(wnd->hRebar, RB_INSERTBAND, (WPARAM)-1, (LPARAM)&rbBand);
 
 			GetWindowRect(wnd->hRegCombo, &rc);
-			rbBand.lpText = "Registers: ";
+			rbBand.lpText = "Registers: "_winstring;
 			rbBand.hwndChild = wnd->hRegCombo;
 			rbBand.cxMinChild = 0;
 			rbBand.cyMinChild = rc.bottom - rc.top;

@@ -19,7 +19,7 @@
 #ifndef MEM_VIEW_H
 #define MEM_VIEW_H
 
-#include <windows.h>
+#include "Platforms/common.h"
 #include "CWindow.h"
 #include "types.h"
 

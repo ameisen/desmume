@@ -19,8 +19,7 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
 
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "Platforms/common.h"
 #include "types.h"
 #include "CWindow.h"
 

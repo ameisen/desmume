@@ -41,7 +41,9 @@
 #include "emufile.h"
 #include "saves.h"
 
-using namespace std;
+using
+	std::string,
+	std::stringstream;
 bool freshMovie = false;	  //True when a movie loads, false when movie is altered.  Used to determine if a movie has been altered since opening
 bool autoMovieBackup = true;
 

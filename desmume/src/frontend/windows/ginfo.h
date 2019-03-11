@@ -19,7 +19,7 @@
 #ifndef GINFO_H
 #define GINFO_H
 
-#include <windows.h>
+#include "Platforms/common.h"
 
 BOOL GInfo_Init();
 void GInfo_DeInit();

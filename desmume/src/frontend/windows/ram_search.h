@@ -21,7 +21,7 @@
 #ifndef RAM_SEARCH_H
 #define RAM_SEARCH_H
 
-#include <windows.h>
+#include "Platforms/common.h"
 
 //64k in Ram_68k[], 8k in Ram_Z80[]   
 //#define _68K_RAM_SIZE 64*1024

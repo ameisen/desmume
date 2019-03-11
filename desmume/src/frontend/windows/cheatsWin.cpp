@@ -80,7 +80,7 @@ u32	searchTypeIDDs[2] = { IDC_RADIO7, IDC_RADIO8 };
 u32	searchCompIDDs[4] = { IDC_RADIO1, IDC_RADIO2, IDC_RADIO3, IDC_RADIO4 };
 
 u32	searchRangeIDDs[4] = { IDC_STATIC_S1, IDC_STATIC_S2, IDC_STATIC_S3, IDC_STATIC_S4 };
-char *searchRangeText[2][4] = { {"[0..255]", "[0..65536]", "[0..16777215]", "[0..4294967295]"},
+const char *searchRangeText[2][4] = { {"[0..255]", "[0..65536]", "[0..16777215]", "[0..4294967295]"},
 								{"[-128..127]", "[-32168..32767]", "[-8388608..8388607]", "[-2147483648..2147483647]"}};
 
 u32 searchRange[4][2] = { 
@@ -713,6 +713,7 @@ void MoveRow(HWND list, int src, int dst)
 	// delete the original item
 	ListView_DeleteItem(cheatListView, src);
 }
+
 INT_PTR CALLBACK CheatsListBox_Proc(HWND dialog, UINT msg,WPARAM wparam,LPARAM lparam)
 {
 	switch(msg)
@@ -734,17 +735,17 @@ INT_PTR CALLBACK CheatsListBox_Proc(HWND dialog, UINT msg,WPARAM wparam,LPARAM l
 			lvColumn.mask=LVCF_FMT|LVCF_WIDTH|LVCF_TEXT;
 			lvColumn.fmt=LVCFMT_CENTER;
 			lvColumn.cx=20;
-			lvColumn.pszText="";
+			lvColumn.pszText = ""_winstring;
 			ListView_InsertColumn(cheatListView, 0, &lvColumn);
 			lvColumn.fmt=LVCFMT_LEFT;
 			lvColumn.cx=84;
-			lvColumn.pszText="Address";
+			lvColumn.pszText = "Address"_winstring;
 			ListView_InsertColumn(cheatListView, 1, &lvColumn);
 			lvColumn.cx=100;
-			lvColumn.pszText="Value";
+			lvColumn.pszText = "Value"_winstring;
 			ListView_InsertColumn(cheatListView, 2, &lvColumn);
 			lvColumn.cx=467;
-			lvColumn.pszText="Description";
+			lvColumn.pszText = "Description"_winstring;
 			ListView_InsertColumn(cheatListView, 3, &lvColumn);
 			lvColumn.fmt=LVCFMT_CENTER;
 
@@ -758,7 +759,7 @@ INT_PTR CALLBACK CheatsListBox_Proc(HWND dialog, UINT msg,WPARAM wparam,LPARAM l
 			while (cheats->getList(&tempCheat))
 			{
 				char buf[256];
-				lvi.pszText= "";
+				lvi.pszText = ""_winstring;
 				switch (tempCheat.type)
 				{
 					case 0:					// Internal
@@ -777,8 +778,8 @@ INT_PTR CALLBACK CheatsListBox_Proc(HWND dialog, UINT msg,WPARAM wparam,LPARAM l
 					{
 						u32 row = ListView_InsertItem(cheatListView, &lvi);
 						ListView_SetCheckState(cheatListView, row, tempCheat.enabled);
-						ListView_SetItemText(cheatListView, row, 1, "Action");
-						ListView_SetItemText(cheatListView, row, 2, "Replay");
+						ListView_SetItemText(cheatListView, row, 1, "Action"_winstring);
+						ListView_SetItemText(cheatListView, row, 2, "Replay"_winstring);
 						ListView_SetItemText(cheatListView, row, 3, tempCheat.description);
 						break;
 					}
@@ -787,8 +788,8 @@ INT_PTR CALLBACK CheatsListBox_Proc(HWND dialog, UINT msg,WPARAM wparam,LPARAM l
 					{
 						u32 row = ListView_InsertItem(cheatListView, &lvi);
 						ListView_SetCheckState(cheatListView, row, tempCheat.enabled);
-						ListView_SetItemText(cheatListView, row, 1, "Code");
-						ListView_SetItemText(cheatListView, row, 2, "breaker");
+						ListView_SetItemText(cheatListView, row, 1, "Code"_winstring);
+						ListView_SetItemText(cheatListView, row, 2, "breaker"_winstring);
 						ListView_SetItemText(cheatListView, row, 3, tempCheat.description);
 						break;
 					}
@@ -1016,13 +1017,13 @@ INT_PTR CALLBACK CheatsListBox_Proc(HWND dialog, UINT msg,WPARAM wparam,LPARAM l
 						u32 row = ListView_InsertItem(cheatListView, &lvi);
 						if (cheatXXtype == 0)
 						{
-							ListView_SetItemText(cheatListView, row, 1, "Action");
-							ListView_SetItemText(cheatListView, row, 2, "Replay");
+							ListView_SetItemText(cheatListView, row, 1, "Action"_winstring);
+							ListView_SetItemText(cheatListView, row, 2, "Replay"_winstring);
 						}
 						else
 						{
-							ListView_SetItemText(cheatListView, row, 1, "Code");
-							ListView_SetItemText(cheatListView, row, 2, "breaker");
+							ListView_SetItemText(cheatListView, row, 1, "Code"_winstring);
+							ListView_SetItemText(cheatListView, row, 2, "breaker"_winstring);
 						}
 						ListView_SetItemText(cheatListView, row, 3, tempCheat.description);
 						ListView_SetCheckState(cheatListView, row, tempCheat.enabled);
@@ -1070,13 +1071,13 @@ INT_PTR CALLBACK CheatsListBox_Proc(HWND dialog, UINT msg,WPARAM wparam,LPARAM l
 
 								if (cheatXXtype == 0)
 								{
-									ListView_SetItemText(cheatListView, cheatEditPos, 1, "Action");
-									ListView_SetItemText(cheatListView, cheatEditPos, 2, "Replay");
+									ListView_SetItemText(cheatListView, cheatEditPos, 1, "Action"_winstring);
+									ListView_SetItemText(cheatListView, cheatEditPos, 2, "Replay"_winstring);
 								}
 								else
 								{
-									ListView_SetItemText(cheatListView, cheatEditPos, 1, "Code");
-									ListView_SetItemText(cheatListView, cheatEditPos, 2, "breaker");
+									ListView_SetItemText(cheatListView, cheatEditPos, 1, "Code"_winstring);
+									ListView_SetItemText(cheatListView, cheatEditPos, 2, "breaker"_winstring);
 								}
 
 								ListView_SetItemText(cheatListView, cheatEditPos, 3, tempCheat.description);
@@ -1288,10 +1289,10 @@ INT_PTR CALLBACK CheatsSearchViewWnd(HWND dialog, UINT msg,WPARAM wparam,LPARAM 
 				lvColumn.mask=LVCF_FMT|LVCF_WIDTH|LVCF_TEXT;
 				lvColumn.fmt=LVCFMT_LEFT;
 				lvColumn.cx=94;
-				lvColumn.pszText="Address";
+				lvColumn.pszText = "Address"_winstring;
 				ListView_InsertColumn(searchListView, 0, &lvColumn);
 				lvColumn.cx=130;
-				lvColumn.pszText="Value";
+				lvColumn.pszText = "Value"_winstring;
 				ListView_InsertColumn(searchListView, 1, &lvColumn);
 
 				LVITEM lvi;
@@ -1549,7 +1550,7 @@ INT_PTR CALLBACK CheatsExportProc(HWND dialog, UINT msg,WPARAM wparam,LPARAM lpa
 			lvColumn.mask=LVCF_FMT|LVCF_TEXT|LVCF_WIDTH;
 			lvColumn.fmt=LVCFMT_LEFT;
 			lvColumn.cx=1000;
-			lvColumn.pszText="Cheats";
+			lvColumn.pszText = "Cheats"_winstring;
 			ListView_InsertColumn(exportListView, 0, &lvColumn);
 
 			LVITEM lvi;
@@ -1593,10 +1594,10 @@ INT_PTR CALLBACK CheatsExportProc(HWND dialog, UINT msg,WPARAM wparam,LPARAM lpa
 								memset(&lvi,0,sizeof(LVITEM));
 								lvi.mask = LVIF_TEXT|LVIF_STATE;
 								lvi.iItem = INT_MAX;
-								lvi.pszText= " ";
+								lvi.pszText = " "_winstring;
 								u32 row = ListView_InsertItem(cheatListView, &lvi);
-								ListView_SetItemText(cheatListView, row, 1, "Action");
-								ListView_SetItemText(cheatListView, row, 2, "Replay");
+								ListView_SetItemText(cheatListView, row, 1, "Action"_winstring);
+								ListView_SetItemText(cheatListView, row, 2, "Replay"_winstring);
 								ListView_SetItemText(cheatListView, row, 3, tmp[i].description);
 								done = true;
 							}

@@ -27,7 +27,7 @@
 #include "mic.h"
 
 #include <mmsystem.h>
-#include <windows.h>
+#include "Platforms/common.h"
 #include <string.h>
 #include <vector>
 #include <fstream>

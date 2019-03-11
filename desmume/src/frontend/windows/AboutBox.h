@@ -19,7 +19,7 @@
 #ifndef ABOUTBOX_H
 #define ABOUTBOX_H
 
-#include <windows.h>
+#include "Platforms/common.h"
 
 extern BOOL CALLBACK AboutBox_Proc(HWND dialog,UINT komunikat,WPARAM wparam,LPARAM lparam);
 

@@ -18,6 +18,7 @@
 
 #include "colorctrl.h"
 #include <stdio.h>
+#include <malloc.h>
 
 static char szClassName[] = "DeSmuME_ColorCtrl";
 

@@ -21,8 +21,7 @@
 #include "types.h"
 
 #if defined(HOST_WINDOWS)
-	#define WIN32_LEAN_AND_MEAN
-	#include <windows.h>
+	#include "Platforms/common.h"
 	#include <direct.h>
 
 		#include "frontend/windows/winutil.h"

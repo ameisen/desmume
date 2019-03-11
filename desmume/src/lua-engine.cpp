@@ -18,7 +18,7 @@
 #include "lua-engine.h"
 
 #if defined(WIN32)
-	#include <windows.h>
+	#include "Platforms/common.h"
 	#include <direct.h>
 	#include <MMSystem.h>
 
@@ -58,8 +58,10 @@
 #include "saves.h"
 #include "emufile.h"
 
-using namespace std;
-
+using std::min;
+using std::max;
+using std::map;
+using std::vector;
 
 // functions that maybe aren't part of the Lua engine
 // but didn't make sense to add to BaseDriver (at least not yet)

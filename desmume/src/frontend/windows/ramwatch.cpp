@@ -22,7 +22,7 @@
 #include "ram_search.h"
 
 #include <assert.h>
-#include <windows.h>
+#include "Platforms/common.h"
 #include <commctrl.h>
 #include <string>
 
@@ -100,7 +100,7 @@ bool VerifyWatchNotAlreadyAdded(const AddressWatcher& watch)
 }
 
 
-bool InsertWatch(const AddressWatcher& Watch, char *Comment, int atIndex)
+bool InsertWatch(const AddressWatcher& Watch, const char *Comment, int atIndex)
 {
 	if(!VerifyWatchNotAlreadyAdded(Watch))
 		return false;
@@ -451,7 +451,7 @@ void OpenRWRecentFile(int memwRFileNumber)
 
 char Gens_Path[64]= "M:\\"; //TODO
 
-int Change_File_S(char *Dest, char *Dir, char *Titre, char *Filter, char *Ext, HWND hwnd)
+static int Change_File_S(char *Dest, char *Dir, const char *Titre, const char *Filter, const char *Ext, HWND hwnd)
 {
 	OPENFILENAME ofn;
 
@@ -588,7 +588,7 @@ bool Load_Watches(bool clear, const char* filename)
 
 
 
-static int Change_File_L(char *Dest, char *Dir, char *Titre, char *Filter, char *Ext, HWND hwnd)
+static int Change_File_L(char *Dest, char *Dir, const char *Titre, const char *Filter, const char *Ext, HWND hwnd)
 {
 	OPENFILENAME ofn;
 
@@ -1017,7 +1017,7 @@ LRESULT CALLBACK RamWatchProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam
 									Item->item.pszText = num;
 								}	return true;
 								case 2:
-									Item->item.pszText = rswatches[iNum].comment ? rswatches[iNum].comment : "";
+									Item->item.pszText = rswatches[iNum].comment ? rswatches[iNum].comment : ""_winstring;
 									return true;
 
 								default:

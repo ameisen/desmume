@@ -18,7 +18,7 @@
 
 #ifndef FIRMCONFIG_H
 #define FIRMCONFIG_H
-#include <windows.h>
+#include "Platforms/common.h"
 
 BOOL CALLBACK FirmConfig_Proc(HWND dialog,UINT komunikat,WPARAM wparam,LPARAM lparam);
 

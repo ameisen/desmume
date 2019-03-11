@@ -18,7 +18,7 @@
 #ifndef _FSNITROVIEW_H_
 #define _FSNITROVIEW_H_
 
-#include <windows.h>
+#include "Platforms/common.h"
 
 extern BOOL CALLBACK ViewFSNitroProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 

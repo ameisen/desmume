@@ -30,7 +30,9 @@
 #include "resource.h"
 #include "winutil.h"
 
-using namespace std;
+using std::min, std::max;
+
+using byte = std::uint8_t;
 
 #define MAX_ADDRESS_SAVE 20
 

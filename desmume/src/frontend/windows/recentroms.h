@@ -20,7 +20,7 @@
 
 #include <vector>
 #include <string>
-#include <windows.h>
+#include "Platforms/common.h"
 
 #include "main.h"
 

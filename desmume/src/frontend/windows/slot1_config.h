@@ -18,7 +18,7 @@
 #ifndef __SLOT1_CONFIG_H_
 #define __SLOT1_CONFIG_H_
 
-#include <windows.h>
+#include "Platforms/common.h"
 
 extern void slot1Dialog(HWND hwnd);
 

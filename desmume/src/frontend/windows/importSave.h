@@ -19,7 +19,7 @@
 #ifndef _IMPORT_SAVE_H_
 #define _IMPORT_SAVE_H_
 
-#include <windows.h>
+#include "Platforms/common.h"
 
 extern bool importSave(HWND hwnd, HINSTANCE hAppInst);
 extern bool exportSave(HWND hwnd, HINSTANCE hAppInst);

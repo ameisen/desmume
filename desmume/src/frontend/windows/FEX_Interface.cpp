@@ -22,7 +22,7 @@
 
 #include "utils/xstring.h"
 
-#include <windows.h>
+#include "Platforms/common.h"
 #include <string>
 #include <vector>
 #include <assert.h>

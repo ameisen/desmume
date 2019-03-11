@@ -19,7 +19,7 @@
 
 #include <assert.h>
 #include <commctrl.h>
-#include <windows.h>
+#include "Platforms/common.h"
 #include <windowsx.h>
 #include <algorithm>
 
@@ -32,8 +32,6 @@
 #include "resource.h"
 #include "winutil.h"
 #include "main.h"
-
-using namespace std;
 
 //////////////////////////////////////////////////////////////////////////////
 

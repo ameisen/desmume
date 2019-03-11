@@ -19,7 +19,7 @@
 #ifndef IO_REG_H
 #define IO_REG_H
 
-#include <windows.h>
+#include "Platforms/common.h"
 #include "CWindow.h"
 
 LRESULT CALLBACK IORegView_Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);

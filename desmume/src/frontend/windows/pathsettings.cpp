@@ -201,7 +201,7 @@ BOOL PathSettings_OnInitDialog(HWND hDlg, HWND hwndFocus, LPARAM lParam)
 		"%I\t\tHour (12):Two Digit\r\n"
 		"%p\t\tAM/PM\r\n"
 		"%M\t\tMinute: Two Digit\r\n"
-		"%S\t\tSecond: Two Digit\r\n";
+		"%S\t\tSecond: Two Digit\r\n"_winstring;
 	GetClientRect(hwnd, &ti.rect);
 	SendMessage(toolTip, TTM_ADDTOOL, NULL, (LPARAM)&ti);
 

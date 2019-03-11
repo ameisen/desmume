@@ -19,7 +19,7 @@
 #define __WINUTIL_H_
 
 #include <stdio.h>
-#include <windows.h>
+#include "Platforms/common.h"
 #include <string>
 
 extern char IniName[MAX_PATH];
@@ -34,9 +34,9 @@ HMENU GetSubMenuByIdOfFirstChild(HMENU menu, UINT child);
 HMENU GetSubMenuById(HMENU menu, UINT id); //untested
 int GetSubMenuIndexByHMENU(HMENU menu, HMENU sub);
 
-void WritePrivateProfileInt(char* appname, char* keyname, int val, char* file);
+void WritePrivateProfileInt(const char* appname, const char* keyname, int val, char* file);
 bool GetPrivateProfileBool(const char* appname, const char* keyname, bool defval, const char* filename);
-void WritePrivateProfileBool(char* appname, char* keyname, bool val, char* file);
+void WritePrivateProfileBool(const char* appname, const char* keyname, bool val, char* file);
 
 
 //returns the specified resource string ID as a std::wstring

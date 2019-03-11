@@ -241,7 +241,8 @@ bool StringToBytes(const std::string& str, void* data, int len)
 std::vector<std::string> tokenize_str(const std::string & str,
                                       const std::string & delims=", \t")
 {
-  using namespace std;
+  using std::string;
+  using std::vector;
   // Skip delims at beginning, find start of first token
   string::size_type lastPos = str.find_first_not_of(delims, 0);
   // Find next delimiter @ end of token

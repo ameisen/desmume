@@ -20,7 +20,7 @@
 #ifndef _PATHSETTINGS_H_
 #define _PATHSETTINGS_H_
 
-#include <windows.h>
+#include "Platforms/common.h"
 
 void WritePathSettings();
 void ReadPathSettings();

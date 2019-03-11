@@ -38,7 +38,7 @@
 
 // For cpu_mutex
 #ifdef HOST_WINDOWS
-#include <windows.h>
+#include "Platforms/common.h"
 #else
 #include <pthread.h>
 #if defined HOST_LINUX

@@ -21,10 +21,7 @@
 #include <map>
 #include <string>
 #include <algorithm>
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <Commdlg.h>
-#include <Shellapi.h>
+#include "Platforms/common.h"
 #include "driver.h"
 #include "lua-engine.h"
 
@@ -373,7 +370,7 @@ void UpdateFileEntered(HWND hDlg)
 
 //extern "C" int Clear_Sound_Buffer(void);
 
-static int Change_File_L(char *Dest, char *Dir, char *Titre, char *Filter, char *Ext, HWND hwnd)
+static int Change_File_L(char *Dest, char *Dir, const char *Titre, const char *Filter, const char *Ext, HWND hwnd)
 {
 	OPENFILENAME ofn;
 

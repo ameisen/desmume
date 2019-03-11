@@ -18,7 +18,7 @@
 #ifndef SOUND_VIEW_H
 #define SOUND_VIEW_H
 
-#include <windows.h>
+#include "Platforms/common.h"
 
 BOOL SoundView_Init();
 void SoundView_DeInit();

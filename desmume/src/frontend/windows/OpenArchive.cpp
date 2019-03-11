@@ -17,7 +17,7 @@
 
 #include "OpenArchive.h"
 
-#include <windows.h>
+#include "Platforms/common.h"
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>

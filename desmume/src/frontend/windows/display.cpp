@@ -24,6 +24,8 @@ along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 #include "windriver.h"
 #include "winutil.h"
 
+using std::min, std::max;
+
 DDRAW ddraw;
 GLDISPLAY gldisplay;
 u32 displayMethod;

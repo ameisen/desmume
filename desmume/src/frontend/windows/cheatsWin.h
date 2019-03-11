@@ -18,7 +18,7 @@
 #ifndef _CHEATSWIN_H_
 #define _CHEATSWIN_H_
 
-#include <windows.h>
+#include "Platforms/common.h"
 #include "types.h"
 
 extern void CheatsListDialog(HWND hwnd);

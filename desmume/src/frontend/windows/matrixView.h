@@ -19,7 +19,7 @@
 #ifndef MATRIXVIEW_H
 #define MATRIXVIEW_H
 
-#include <windows.h>
+#include "Platforms/common.h"
 
 extern BOOL CALLBACK ViewMatricesProc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
