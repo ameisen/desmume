@@ -6719,7 +6719,7 @@ const char* MakeScriptPathAbsolute(const char* filename, const char* extraDirToC
 	return filename;
 }
 
-extern void RequestAbortLuaScript(int uid, const char* message);
+extern void RequestAbortLuaScript(uintptr_t uid, const char* message);
 
 const char* OpenLuaScript(const char* filename, const char* extraDirToCheck, bool makeSubservient)
 {

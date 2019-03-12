@@ -29,7 +29,7 @@ LRESULT ColorCtrl_OnNCDestroy(ColorCtrl *ccp, WPARAM wParam, LPARAM lParam);
 
 static ColorCtrl* ColorCtrl_Get(HWND hWnd)
 {
-	return (ColorCtrl*)GetWindowLong(hWnd, 0);
+	return (ColorCtrl*)GetWindowLongPtr(hWnd, 0);
 }
 
 void ColorCtrl_Register()
@@ -109,7 +109,7 @@ LRESULT ColorCtrl_OnNCCreate(HWND hWnd, WPARAM wParam, LPARAM lParam)
 	pCtrl->color = 0;
 
 	// Attach custom structure to this window.
-	SetWindowLong(hWnd, 0, (LONG)pCtrl);
+	SetWindowLongPtr(hWnd, 0, (LONG_PTR)pCtrl);
 
 	// Continue with window creation.
 	return TRUE;

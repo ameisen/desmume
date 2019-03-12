@@ -19,6 +19,8 @@
 
 #include "lua-engine.h"
 
+using uid_t = uintptr_t;
+
 #ifdef WIN32
 	typedef HMENU PlatformMenu;    // hMenu
 	#define MAX_MENU_COUNT (IDC_LUAMENU_RESERVE_END - IDC_LUAMENU_RESERVE_START + 1)
@@ -138,12 +140,12 @@ struct LuaContextInfo {
 	LuaGUIData guiData;
 	LuaMenuData menuData;
 	// callbacks into the lua window... these don't need to exist per context the way I'm using them, but whatever
-	void(*print)(int uid, const char* str);
-	void(*onstart)(int uid);
-	void(*onstop)(int uid, bool statusOK);
+	void(*print)(uid_t uid, const char* str);
+	void(*onstart)(uid_t uid);
+	void(*onstop)(uid_t uid, bool statusOK);
 };
-std::map<int, LuaContextInfo*> luaContextInfo;
-std::map<lua_State*, int> luaStateToUIDMap;
+std::map<uid_t, LuaContextInfo*> luaContextInfo;
+std::map<lua_State*, uid_t> luaStateToUIDMap;
 int g_numScriptsStarted = 0;
 bool g_anyScriptsHighSpeed = false;
 bool g_stopAllScriptsEnabled = true;
@@ -227,7 +229,7 @@ static const char* luaMemHookTypeStrings [] =
 };
 static const int _makeSureWeHaveTheRightNumberOfStrings2 = (sizeof(luaMemHookTypeStrings)/sizeof(*luaMemHookTypeStrings) == LUAMEMHOOK_COUNT) ? 1 : 0;
 
-void StopScriptIfFinished(int uid, bool justReturned = false);
+void StopScriptIfFinished(uid_t uid, bool justReturned = false);
 void SetSaveKey(LuaContextInfo& info, const char* key);
 void SetLoadKey(LuaContextInfo& info, const char* key);
 void RefreshScriptStartedStatus();
@@ -497,7 +499,7 @@ static int doPopup(lua_State* L, const char* deftype, const char* deficon)
 	static const int etypes [] = {MB_OK, MB_YESNO, MB_YESNOCANCEL, MB_OKCANCEL, MB_ABORTRETRYIGNORE};
 	static const int eicons [] = {MB_ICONINFORMATION, MB_ICONQUESTION, MB_ICONWARNING, MB_ICONERROR};
 //	DialogsOpen++;
-	int uid = luaStateToUIDMap[L->l_G->mainthread];
+	uid_t uid = luaStateToUIDMap[L->l_G->mainthread];
 	EnableWindow(MainWindow->getHWnd(), false);
 //	if (Full_Screen)
 //	{
@@ -625,7 +627,7 @@ static char* ConstructScriptSaveDataPath(char* output, int bufferSize, LuaContex
 // also, if you change the default value that will reset the variable to the new default.
 DEFINE_LUA_FUNCTION(emu_persistglobalvariables, "variabletable")
 {
-	int uid = luaStateToUIDMap[L->l_G->mainthread];
+	uid_t uid = luaStateToUIDMap[L->l_G->mainthread];
 	LuaContextInfo& info = GetCurrentInfo();
 
 	// construct a path we can load the persistent variables from
@@ -1122,7 +1124,7 @@ DEFINE_LUA_FUNCTION(print, "...")
 {
 	const char* str = toCString(L);
 
-	int uid = luaStateToUIDMap[L->l_G->mainthread];
+	uid_t uid = luaStateToUIDMap[L->l_G->mainthread];
 	LuaContextInfo& info = GetCurrentInfo();
 
 	if(info.print)
@@ -1415,7 +1417,7 @@ void indicateBusy(lua_State* L, bool busy)
 		va_end(argp);
 		lua_concat(L, 2);
 		LuaContextInfo& info = GetCurrentInfo();
-		int uid = luaStateToUIDMap[L->l_G->mainthread];
+		uid_t uid = luaStateToUIDMap[L->l_G->mainthread];
 		if(info.print)
 		{
 			info.print(uid, lua_tostring(L,-1));
@@ -1429,7 +1431,7 @@ void indicateBusy(lua_State* L, bool busy)
 	}
 */
 #if defined(_WIN32)
-	int uid = luaStateToUIDMap[L->l_G->mainthread];
+	uid_t uid = luaStateToUIDMap[L->l_G->mainthread];
 	HWND hDlg = (HWND)uid;
 	char str [1024];
 	GetWindowText(hDlg, str, 1000);
@@ -1537,7 +1539,7 @@ void printfToOutput(const char* fmt, ...)
 	if(info.print)
 	{
 		lua_State* L = info.L;
-		int uid = luaStateToUIDMap[L->l_G->mainthread];
+		uid_t uid = luaStateToUIDMap[L->l_G->mainthread];
 		info.print(uid, str);
 		info.print(uid, "\r\n");
 		worry(L,300);
@@ -1738,7 +1740,7 @@ DEFINE_LUA_FUNCTION(emu_frameadvance, "")
 	if(FailVerifyAtFrameBoundary(L, "emu.frameadvance", 0,1))
 		return emu_wait(L);
 
-	int uid = luaStateToUIDMap[L->l_G->mainthread];
+	uid_t uid = luaStateToUIDMap[L->l_G->mainthread];
 	LuaContextInfo& info = GetCurrentInfo();
 
 	if(!info.ranFrameAdvance)
@@ -2207,7 +2209,7 @@ DEFINE_LUA_FUNCTION(state_loadscriptdata, "location")
 			//		saveData.ImportRecords(luaSaveFile);
 			//		fclose(luaSaveFile);
 
-			//		int uid = luaStateToUIDMap[L->l_G->mainthread];
+			//		uid_t uid = luaStateToUIDMap[L->l_G->mainthread];
 			//		LuaContextInfo& info = GetCurrentInfo();
 
 			//		lua_settop(L, 0);
@@ -2257,7 +2259,7 @@ public:
 					{
 						const NDSDisplayInfo &dispInfo = GPU->GetDisplayInfo();
 						char temp [256];
-						sprintf(temp, " " /*"mismatch at "*/ "byte %d(0x%X at 0x%X): %d(0x%X) != %d(0x%X)\n", i, i, dst, *src,*src, *dst,*dst);
+						sprintf(temp, " " /*"mismatch at "*/ "byte %d(0x%X at 0x%p): %d(0x%X) != %d(0x%X)\n", i, i, dst, *src,*src, *dst,*dst);
 
 						if(ptr == dispInfo.masterNativeBuffer || ptr == dispInfo.masterCustomBuffer || ptr == GPU->GetEngineMain()->Get3DFramebufferMain()) // ignore screen-only differences since frame skipping can cause them and it's probably ok
 							break;
@@ -2481,21 +2483,21 @@ static const struct ColorMapping
 }
 s_colorMapping [] =
 {
-	{"white",     0xFFFFFFFF},
-	{"black",     0x000000FF},
-	{"clear",     0x00000000},
-	{"gray",      0x7F7F7FFF},
-	{"grey",      0x7F7F7FFF},
-	{"red",       0xFF0000FF},
-	{"orange",    0xFF7F00FF},
-	{"yellow",    0xFFFF00FF},
-	{"chartreuse",0x7FFF00FF},
-	{"green",     0x00FF00FF},
-	{"teal",      0x00FF7FFF},
-	{"cyan" ,     0x00FFFFFF},
-	{"blue",      0x0000FFFF},
-	{"purple",    0x7F00FFFF},
-	{"magenta",   0xFF00FFFF},
+	{"white",     (int)0xFFFFFFFF},
+	{"black",     (int)0x000000FF},
+	{"clear",     (int)0x00000000},
+	{"gray",      (int)0x7F7F7FFF},
+	{"grey",      (int)0x7F7F7FFF},
+	{"red",       (int)0xFF0000FF},
+	{"orange",    (int)0xFF7F00FF},
+	{"yellow",    (int)0xFFFF00FF},
+	{"chartreuse",(int)0x7FFF00FF},
+	{"green",     (int)0x00FF00FF},
+	{"teal",      (int)0x00FF7FFF},
+	{"cyan" ,     (int)0x00FFFFFF},
+	{"blue",      (int)0x0000FFFF},
+	{"purple",    (int)0x7F00FFFF},
+	{"magenta",   (int)0xFF00FFFF},
 };
 
 inline int getcolor_unmodified(lua_State *L, int idx, int defaultColor)
@@ -5277,7 +5279,7 @@ void ResetInfo(LuaContextInfo& info)
 	info.guiData.yOrigin = 192;
 }
 
-void OpenLuaContext(int uid, void(*print)(int uid, const char* str), void(*onstart)(int uid), void(*onstop)(int uid, bool statusOK))
+void OpenLuaContext(uid_t uid, void(*print)(uid_t uid, const char* str), void(*onstart)(uid_t uid), void(*onstop)(uid_t uid, bool statusOK))
 {
 	LuaContextInfo* newInfo = new LuaContextInfo();
 	ResetInfo(*newInfo);
@@ -5287,7 +5289,7 @@ void OpenLuaContext(int uid, void(*print)(int uid, const char* str), void(*onsta
 	luaContextInfo[uid] = newInfo;
 }
 
-void RunLuaScriptFile(int uid, const char* filenameCStr)
+void RunLuaScriptFile(uid_t uid, const char* filenameCStr)
 {
 	if(luaContextInfo.find(uid) == luaContextInfo.end())
 		return;
@@ -5385,7 +5387,7 @@ void RunLuaScriptFile(int uid, const char* filenameCStr)
 	} while(info.restart);
 }
 
-void StopScriptIfFinished(int uid, bool justReturned)
+void StopScriptIfFinished(uid_t uid, bool justReturned)
 {
 	LuaContextInfo& info = *luaContextInfo[uid];
 	if(!info.returned)
@@ -5432,7 +5434,7 @@ void StopScriptIfFinished(int uid, bool justReturned)
 	}
 }
 
-void RequestAbortLuaScript(int uid, const char* message)
+void RequestAbortLuaScript(uid_t uid, const char* message)
 {
 	if(luaContextInfo.find(uid) == luaContextInfo.end())
 		return;
@@ -5486,7 +5488,7 @@ void SetLoadKey(LuaContextInfo& info, const char* key)
 	}
 }
 
-void HandleCallbackError(lua_State* L, LuaContextInfo& info, int uid, bool stopScript)
+void HandleCallbackError(lua_State* L, LuaContextInfo& info, uid_t uid, bool stopScript)
 {
 	info.crashed = true;
 	if(L->errfunc || L->errorJmp)
@@ -5507,7 +5509,7 @@ void HandleCallbackError(lua_State* L, LuaContextInfo& info, int uid, bool stopS
 	}
 }
 
-void CallExitFunction(int uid)
+void CallExitFunction(uid_t uid)
 {
 	LuaContextInfo& info = *luaContextInfo[uid];
 	lua_State* L = info.L;
@@ -5599,7 +5601,7 @@ void CallExitFunction(int uid)
 	}
 }
 
-void StopLuaScript(int uid)
+void StopLuaScript(uid_t uid)
 {
 	LuaContextInfo* infoPtr = luaContextInfo[uid];
 	if(!infoPtr)
@@ -5681,7 +5683,7 @@ void StopLuaScript(int uid)
 	}
 }
 
-void CloseLuaContext(int uid)
+void CloseLuaContext(uid_t uid)
 {
 	StopLuaScript(uid);
 	delete luaContextInfo[uid];
@@ -5699,8 +5701,8 @@ TieredRegion hookedRegions [LUAMEMHOOK_COUNT];
 static void CalculateMemHookRegions(LuaMemHookType hookType)
 {
 	std::vector<unsigned int> hookedBytes;
-	std::map<int, LuaContextInfo*>::iterator iter = luaContextInfo.begin();
-	std::map<int, LuaContextInfo*>::iterator end = luaContextInfo.end();
+	std::map<uid_t, LuaContextInfo*>::iterator iter = luaContextInfo.begin();
+	std::map<uid_t, LuaContextInfo*>::iterator end = luaContextInfo.end();
 	while(iter != end)
 	{
 		LuaContextInfo& info = *iter->second;
@@ -5736,8 +5738,8 @@ static void CalculateMemHookRegions(LuaMemHookType hookType)
 
 void CallRegisteredLuaMemHook_LuaMatch(unsigned int address, int size, unsigned int value, LuaMemHookType hookType)
 {
-	std::map<int, LuaContextInfo*>::iterator iter = luaContextInfo.begin();
-	std::map<int, LuaContextInfo*>::iterator end = luaContextInfo.end();
+	std::map<uid_t, LuaContextInfo*>::iterator iter = luaContextInfo.begin();
+	std::map<uid_t, LuaContextInfo*>::iterator end = luaContextInfo.end();
 	while(iter != end)
 	{
 		LuaContextInfo& info = *iter->second;
@@ -5767,7 +5769,7 @@ void CallRegisteredLuaMemHook_LuaMatch(unsigned int address, int size, unsigned 
 						RefreshScriptSpeedStatus();
 						if (errorcode)
 						{
-							int uid = iter->first;
+							uid_t uid = iter->first;
 							HandleCallbackError(L,info,uid,true);
 						}
 						break;
@@ -5788,8 +5790,8 @@ void CallRegisteredLuaMemHook_LuaMatch(unsigned int address, int size, unsigned 
 
 void CallRegisteredLuaMenuHandlers(PlatformMenuItem menuItem)
 {
-	std::map<int, LuaContextInfo*>::iterator iter = luaContextInfo.begin();
-	std::map<int, LuaContextInfo*>::iterator end = luaContextInfo.end();
+	std::map<uid_t, LuaContextInfo*>::iterator iter = luaContextInfo.begin();
+	std::map<uid_t, LuaContextInfo*>::iterator end = luaContextInfo.end();
 	while(iter != end)
 	{
 		LuaContextInfo& info = *iter->second;
@@ -5813,7 +5815,7 @@ void CallRegisteredLuaMenuHandlers(PlatformMenuItem menuItem)
 				RefreshScriptSpeedStatus();
 				if (errorcode)
 				{
-					int uid = iter->first;
+					uid_t uid = iter->first;
 					HandleCallbackError(L,info,uid,true);
 				}
 				break;
@@ -5832,8 +5834,8 @@ void CallRegisteredLuaMenuHandlers(PlatformMenuItem menuItem)
 
 bool AnyLuaActive()
 {
-	std::map<int, LuaContextInfo*>::iterator iter = luaContextInfo.begin();
-	std::map<int, LuaContextInfo*>::iterator end = luaContextInfo.end();
+	std::map<uid_t, LuaContextInfo*>::iterator iter = luaContextInfo.begin();
+	std::map<uid_t, LuaContextInfo*>::iterator end = luaContextInfo.end();
 	while(iter != end)
 	{
 		LuaContextInfo& info = *iter->second;
@@ -5849,11 +5851,11 @@ void _CallRegisteredLuaFunctions(LuaCallID calltype, int (*beforeCallback)(lua_S
 	assert((unsigned int)calltype < (unsigned int)LUACALL_COUNT);
 	const char* idstring = luaCallIDStrings[calltype];
 
-	std::map<int, LuaContextInfo*>::iterator iter = luaContextInfo.begin();
-	std::map<int, LuaContextInfo*>::iterator end = luaContextInfo.end();
+	std::map<uid_t, LuaContextInfo*>::iterator iter = luaContextInfo.begin();
+	std::map<uid_t, LuaContextInfo*>::iterator end = luaContextInfo.end();
 	while(iter != end)
 	{
-		int uid = iter->first;
+		uid_t uid = iter->first;
 		LuaContextInfo& info = *iter->second;
 		lua_State* L = info.L;
 		if(L && (!info.panic || calltype == LUACALL_BEFOREEXIT))
@@ -5950,11 +5952,11 @@ void CallRegisteredLuaSaveFunctions(int savestateNumber, LuaSaveData& saveData)
 {
 	const char* idstring = luaCallIDStrings[LUACALL_BEFORESAVE];
 
-	std::map<int, LuaContextInfo*>::iterator iter = luaContextInfo.begin();
-	std::map<int, LuaContextInfo*>::iterator end = luaContextInfo.end();
+	std::map<uid_t, LuaContextInfo*>::iterator iter = luaContextInfo.begin();
+	std::map<uid_t, LuaContextInfo*>::iterator end = luaContextInfo.end();
 	while(iter != end)
 	{
-		int uid = iter->first;
+		uid_t uid = iter->first;
 		LuaContextInfo& info = *iter->second;
 		lua_State* L = info.L;
 		if(L)
@@ -5997,11 +5999,11 @@ void CallRegisteredLuaLoadFunctions(int savestateNumber, const LuaSaveData& save
 {
 	const char* idstring = luaCallIDStrings[LUACALL_AFTERLOAD];
 
-	std::map<int, LuaContextInfo*>::iterator iter = luaContextInfo.begin();
-	std::map<int, LuaContextInfo*>::iterator end = luaContextInfo.end();
+	std::map<uid_t, LuaContextInfo*>::iterator iter = luaContextInfo.begin();
+	std::map<uid_t, LuaContextInfo*>::iterator end = luaContextInfo.end();
 	while(iter != end)
 	{
-		int uid = iter->first;
+		uid_t uid = iter->first;
 		LuaContextInfo& info = *iter->second;
 		lua_State* L = info.L;
 		if(L)
@@ -6471,7 +6473,7 @@ void BinaryToLuaStack(lua_State* L, const unsigned char* data, unsigned int size
 }
 
 // saves Lua stack into a record and pops it
-void LuaSaveData::SaveRecord(int uid, unsigned int key)
+void LuaSaveData::SaveRecord(uid_t uid, unsigned int key)
 {
 	LuaContextInfo& info = *luaContextInfo[uid];
 	lua_State* L = info.L;
@@ -6501,7 +6503,7 @@ void LuaSaveData::SaveRecord(int uid, unsigned int key)
 }
 
 // pushes a record's data onto the Lua stack
-void LuaSaveData::LoadRecord(int uid, unsigned int key, unsigned int itemsToLoad) const
+void LuaSaveData::LoadRecord(uid_t uid, unsigned int key, unsigned int itemsToLoad) const
 {
 	LuaContextInfo& info = *luaContextInfo[uid];
 	lua_State* L = info.L;
@@ -6523,7 +6525,7 @@ void LuaSaveData::LoadRecord(int uid, unsigned int key, unsigned int itemsToLoad
 }
 
 // saves part of the Lua stack (at the given index) into a record and does NOT pop anything
-void LuaSaveData::SaveRecordPartial(int uid, unsigned int key, int idx)
+void LuaSaveData::SaveRecordPartial(uid_t uid, unsigned int key, int idx)
 {
 	LuaContextInfo& info = *luaContextInfo[uid];
 	lua_State* L = info.L;
@@ -6658,8 +6660,8 @@ void LuaSaveData::ClearRecords()
 
 void DontWorryLua() // everything's going to be OK
 {
-	std::map<int, LuaContextInfo*>::const_iterator iter = luaContextInfo.begin();
-	std::map<int, LuaContextInfo*>::const_iterator end = luaContextInfo.end();
+	std::map<uid_t, LuaContextInfo*>::const_iterator iter = luaContextInfo.begin();
+	std::map<uid_t, LuaContextInfo*>::const_iterator end = luaContextInfo.end();
 	while(iter != end)
 	{
 		dontworry(*iter->second);
@@ -6677,11 +6679,11 @@ void StopAllLuaScripts()
 	if(!g_stopAllScriptsEnabled)
 		return;
 
-	std::map<int, LuaContextInfo*>::const_iterator iter = luaContextInfo.begin();
-	std::map<int, LuaContextInfo*>::const_iterator end = luaContextInfo.end();
+	std::map<uid_t, LuaContextInfo*>::const_iterator iter = luaContextInfo.begin();
+	std::map<uid_t, LuaContextInfo*>::const_iterator end = luaContextInfo.end();
 	while(iter != end)
 	{
-		int uid = iter->first;
+		uid_t uid = iter->first;
 		LuaContextInfo& info = *iter->second;
 		bool wasStarted = info.started;
 		StopLuaScript(uid);
@@ -6695,11 +6697,11 @@ void RestartAllLuaScripts()
 	if(!g_stopAllScriptsEnabled)
 		return;
 
-	std::map<int, LuaContextInfo*>::const_iterator iter = luaContextInfo.begin();
-	std::map<int, LuaContextInfo*>::const_iterator end = luaContextInfo.end();
+	std::map<uid_t, LuaContextInfo*>::const_iterator iter = luaContextInfo.begin();
+	std::map<uid_t, LuaContextInfo*>::const_iterator end = luaContextInfo.end();
 	while(iter != end)
 	{
-		int uid = iter->first;
+		uid_t uid = iter->first;
 		LuaContextInfo& info = *iter->second;
 		if(info.restartLater || info.started)
 		{
@@ -6715,8 +6717,8 @@ void RefreshScriptStartedStatus()
 {
 	int numScriptsStarted = 0;
 
-	std::map<int, LuaContextInfo*>::const_iterator iter = luaContextInfo.begin();
-	std::map<int, LuaContextInfo*>::const_iterator end = luaContextInfo.end();
+	std::map<uid_t, LuaContextInfo*>::const_iterator iter = luaContextInfo.begin();
+	std::map<uid_t, LuaContextInfo*>::const_iterator end = luaContextInfo.end();
 	while(iter != end)
 	{
 		LuaContextInfo& info = *iter->second;
@@ -6734,8 +6736,8 @@ void RefreshScriptSpeedStatus()
 {
 	g_anyScriptsHighSpeed = false;
 
-	std::map<int, LuaContextInfo*>::const_iterator iter = luaContextInfo.begin();
-	std::map<int, LuaContextInfo*>::const_iterator end = luaContextInfo.end();
+	std::map<uid_t, LuaContextInfo*>::const_iterator iter = luaContextInfo.begin();
+	std::map<uid_t, LuaContextInfo*>::const_iterator end = luaContextInfo.end();
 	while(iter != end)
 	{
 		LuaContextInfo& info = *iter->second;

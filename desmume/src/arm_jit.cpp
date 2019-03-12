@@ -2373,7 +2373,7 @@ static int op_ldm_stm2(u32 i, bool store, int dir, bool before, bool writeback)
 	}
 	else
 	{
-		S_DST_R15;
+		S_DST_R15; // TODO : I don't think this is right for 64-bit.
 	}
 
 	// FIXME
@@ -2451,7 +2451,7 @@ static int op_bx(Mem srcreg, bool blx, bool test_thumb)
 		dst = c.newGpVar(kX86VarTypeGpd);
 		c.mov(dst, thumb);
 		c.and_(thumb, 1);
-		c.lea(mask, ptr_abs((void*)0xFFFFFFFC, thumb.r64(), kScale2Times));
+		c.lea(mask, ptr_abs((void*)0xFFFFFFFC, thumb.r64(), kScale2Times)); // TODO : I don't think this is right for 64-bit.
 		c.shl(thumb, 5);
 		c.or_(cpu_ptr_byte(CPSR, 0), thumb.r8Lo());
 		c.and_(dst, mask);
@@ -3756,7 +3756,7 @@ static int op_bx_thumb(Mem srcreg, bool blx, bool test_thumb)
 	if(test_thumb)
 	{
 		GpVar mask = c.newGpVar(kX86VarTypeGpd);
-		c.lea(mask, ptr_abs((void*)0xFFFFFFFC, thumb.r64(), kScale2Times));
+		c.lea(mask, ptr_abs((void*)0xFFFFFFFC, thumb.r64(), kScale2Times)); // TODO : I don't think this is right for 64-bit.
 		c.and_(dst, mask);
 	}
 	else
