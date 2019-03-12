@@ -80,7 +80,6 @@ struct Rar_Allocator
 	static UNRAR_PRE_NOTHROW void operator delete ( void* p ) UNRAR_NOTHROW { free( p ); }
 	static UNRAR_PRE_NOTHROW void* operator new ( size_t s ) UNRAR_NOTHROW { return malloc( s ); }
 	static UNRAR_PRE_NOTHROW void* operator new ( size_t, void* p ) UNRAR_NOTHROW { return p; }
-	static UNRAR_PRE_NOTHROW void operator delete (void* p, size_t) UNRAR_NOTHROW { free(p); }
 };
 
 //// os.hpp
