@@ -16,9 +16,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "IORegView.h"
+#include "desmume"
 
-#include <commctrl.h>
+#include "IORegView.h"
 
 #include "debug.h"
 #include "MMU.h"

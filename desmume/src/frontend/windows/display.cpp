@@ -15,10 +15,9 @@ You should have received a copy of the GNU General Public License
 along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "display.h"
+#include "desmume"
 
-#include <MMSystem.h>
-#include <WindowsX.h>
+#include "display.h"
 
 #include "main.h"
 #include "windriver.h"

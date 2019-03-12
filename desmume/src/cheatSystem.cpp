@@ -15,6 +15,8 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "cheatSystem.h"
 #include "utils/bits.h"
 
@@ -22,10 +24,6 @@
 #include "mem.h"
 #include "MMU.h"
 #include "debug.h"
-
-#ifndef _MSC_VER 
-#include <stdint.h>
-#endif
 
 static const char hexValid[23] = {"0123456789ABCDEFabcdef"};
 

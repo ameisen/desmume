@@ -17,14 +17,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "OGLRender.h"
+#include "desmume"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <algorithm>
-#include <string>
-#include <sstream>
+#include "OGLRender.h"
 
 #include "common.h"
 #include "debug.h"
@@ -34,8 +29,8 @@
 #include "./filter/xbrz.h"
 
 #ifdef ENABLE_SSE2
-#include <emmintrin.h>
-#include "./utils/colorspacehandler/colorspacehandler_SSE2.h"
+#	include <emmintrin.h>
+#	include "./utils/colorspacehandler/colorspacehandler_SSE2.h"
 #endif
 
 #if MSB_FIRST

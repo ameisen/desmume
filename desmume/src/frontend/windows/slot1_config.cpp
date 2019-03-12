@@ -15,11 +15,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "slot1_config.h"
+#include "desmume"
 
-#include <windowsx.h>
-#include <shlobj.h>
-#include <string>
+#include "slot1_config.h"
 
 #include "slot1.h"
 #include "debug.h"

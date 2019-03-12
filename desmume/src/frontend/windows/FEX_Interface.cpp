@@ -17,15 +17,12 @@
 
 //TODO - consider making this use UTF-8 everywhere instead of wstrings. sort of cleaner. but im tired of it now. it works presently.
 
+#include "desmume"
+
 #include "FEX_Interface.h"
 #include "File_Extractor/fex/fex.h"
 
 #include "utils/xstring.h"
-
-#include "Platforms/common.h"
-#include <string>
-#include <vector>
-#include <assert.h>
 
 STDAPI GetNumberOfFormats(UINT32 *numFormats);
 

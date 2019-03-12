@@ -17,9 +17,7 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <string.h>
-#include <algorithm>
-#include <assert.h>
+#include "desmume"
 
 #include "texcache.h"
 
@@ -33,9 +31,6 @@
 #ifdef ENABLE_SSE2
 #include "./utils/colorspacehandler/colorspacehandler_SSE2.h"
 #endif
-
-using std::min;
-using std::max;
 
 //only dump this from ogl renderer. for now, softrasterizer creates things in an incompatible pixel format
 //#define DEBUG_DUMP_TEXTURE

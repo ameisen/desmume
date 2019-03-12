@@ -25,6 +25,8 @@
 // - Check LDMxx2/STMxx2 (those opcodes that act on User mode registers instead 
 //     of current ones)
 
+#include "desmume"
+
 //#define UNTESTEDOPCODEDEBUG
 #include "utils/bits.h"
 #include "instructions.h"

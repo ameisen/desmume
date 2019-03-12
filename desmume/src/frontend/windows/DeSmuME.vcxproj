@@ -42,43 +42,7 @@
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <!-- desmume customization: set PlatformToolset to an uptodate choice for vs2015 and leave it to the default vs2010 toolset for vs2010 -->
-  <!-- NOTE: the location of this hack is important or else we break resource editing, intellisense, and ctrl+f7 in vs2010 either; or it doesnt work for vs2015. weird. -->
-  <PropertyGroup Condition="'$(VisualStudioVersion)' == '15.0'" Label="Configuration">
-    <PlatformToolset>v141_xp</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(VisualStudioVersion)' == '14.0'" Label="Configuration">
-    <PlatformToolset>v140_xp</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <PlatformToolset>v142</PlatformToolset>
-    <SpectreMitigation>false</SpectreMitigation>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">
-    <PlatformToolset>v142</PlatformToolset>
-    <SpectreMitigation>false</SpectreMitigation>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <PlatformToolset>v142</PlatformToolset>
-    <SpectreMitigation>false</SpectreMitigation>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">
-    <PlatformToolset>v142</PlatformToolset>
-    <SpectreMitigation>false</SpectreMitigation>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <PlatformToolset>v142</PlatformToolset>
-    <SpectreMitigation>false</SpectreMitigation>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">
-    <PlatformToolset>v142</PlatformToolset>
-    <SpectreMitigation>false</SpectreMitigation>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <PlatformToolset>v142</PlatformToolset>
-    <SpectreMitigation>false</SpectreMitigation>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">
+  <PropertyGroup Label="Configuration">
     <PlatformToolset>v142</PlatformToolset>
     <SpectreMitigation>false</SpectreMitigation>
   </PropertyGroup>
@@ -91,97 +55,23 @@
     <Import Project="desmume.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Link>
-      <LargeAddressAware>true</LargeAddressAware>
-    </Link>
+  <ItemDefinitionGroup>
     <ClCompile>
       <SupportJustMyCode>true</SupportJustMyCode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <ConformanceMode>true</ConformanceMode>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
       <OpenMPSupport>false</OpenMPSupport>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">
-    <Link>
-      <LargeAddressAware>true</LargeAddressAware>
-    </Link>
-    <ClCompile>
-      <SupportJustMyCode>true</SupportJustMyCode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <ConformanceMode>true</ConformanceMode>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <OpenMPSupport>false</OpenMPSupport>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">
-    <Link>
-      <LargeAddressAware>true</LargeAddressAware>
-    </Link>
-    <ClCompile>
-      <SupportJustMyCode>true</SupportJustMyCode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <ConformanceMode>true</ConformanceMode>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <OpenMPSupport>false</OpenMPSupport>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Link>
-      <LargeAddressAware>true</LargeAddressAware>
-    </Link>
-    <ClCompile>
-      <SupportJustMyCode>true</SupportJustMyCode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <ConformanceMode>true</ConformanceMode>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <OpenMPSupport>false</OpenMPSupport>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <SupportJustMyCode>true</SupportJustMyCode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <ConformanceMode>true</ConformanceMode>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <OpenMPSupport>false</OpenMPSupport>
-    </ClCompile>
-    <Link>
-      <LargeAddressAware>true</LargeAddressAware>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">
-    <ClCompile>
-      <SupportJustMyCode>true</SupportJustMyCode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <ConformanceMode>true</ConformanceMode>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <OpenMPSupport>false</OpenMPSupport>
-    </ClCompile>
-    <Link>
-      <LargeAddressAware>true</LargeAddressAware>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <SupportJustMyCode>true</SupportJustMyCode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <ConformanceMode>true</ConformanceMode>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <OpenMPSupport>false</OpenMPSupport>
-    </ClCompile>
-    <Link>
-      <LargeAddressAware>true</LargeAddressAware>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">
-    <ClCompile>
-      <SupportJustMyCode>true</SupportJustMyCode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <ConformanceMode>true</ConformanceMode>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <OpenMPSupport>false</OpenMPSupport>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>desmume</PrecompiledHeaderFile>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
@@ -229,31 +119,81 @@
     <ClCompile Include="..\..\frontend\modules\ImageOut.cpp" />
     <ClCompile Include="..\..\gfx3d.cpp" />
     <ClCompile Include="..\..\GPU.cpp" />
-    <ClCompile Include="..\..\libretro-common\compat\compat_fnmatch.c" />
-    <ClCompile Include="..\..\libretro-common\compat\compat_getopt.c" />
-    <ClCompile Include="..\..\libretro-common\compat\compat_posix_string.c" />
-    <ClCompile Include="..\..\libretro-common\compat\compat_snprintf.c" />
-    <ClCompile Include="..\..\libretro-common\compat\compat_strcasestr.c" />
-    <ClCompile Include="..\..\libretro-common\compat\compat_strl.c" />
-    <ClCompile Include="..\..\libretro-common\encodings\encoding_utf.c" />
-    <ClCompile Include="..\..\libretro-common\features\features_cpu.c" />
-    <ClCompile Include="..\..\libretro-common\file\archive_file.c" />
-    <ClCompile Include="..\..\libretro-common\file\archive_file_zlib.c" />
-    <ClCompile Include="..\..\libretro-common\file\file_path.c" />
-    <ClCompile Include="..\..\libretro-common\file\nbio\nbio_stdio.c" />
-    <ClCompile Include="..\..\libretro-common\file\retro_dirent.c" />
-    <ClCompile Include="..\..\libretro-common\file\retro_stat.c" />
-    <ClCompile Include="..\..\libretro-common\formats\bmp\rbmp_encode.c" />
-    <ClCompile Include="..\..\libretro-common\formats\png\rpng.c" />
-    <ClCompile Include="..\..\libretro-common\formats\png\rpng_encode.c" />
-    <ClCompile Include="..\..\libretro-common\hash\rhash.c" />
-    <ClCompile Include="..\..\libretro-common\lists\dir_list.c" />
-    <ClCompile Include="..\..\libretro-common\lists\file_list.c" />
-    <ClCompile Include="..\..\libretro-common\lists\string_list.c" />
-    <ClCompile Include="..\..\libretro-common\rthreads\rsemaphore.c" />
-    <ClCompile Include="..\..\libretro-common\rthreads\rthreads.c" />
-    <ClCompile Include="..\..\libretro-common\streams\file_stream.c" />
-    <ClCompile Include="..\..\libretro-common\streams\memory_stream.c" />
+    <ClCompile Include="..\..\libretro-common\compat\compat_fnmatch.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\compat\compat_getopt.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\compat\compat_posix_string.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\compat\compat_snprintf.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\compat\compat_strcasestr.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\compat\compat_strl.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\encodings\encoding_utf.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\features\features_cpu.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\file\archive_file.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\file\archive_file_zlib.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\file\file_path.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\file\nbio\nbio_stdio.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\file\retro_dirent.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\file\retro_stat.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\formats\bmp\rbmp_encode.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\formats\png\rpng.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\formats\png\rpng_encode.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\hash\rhash.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\lists\dir_list.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\lists\file_list.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\lists\string_list.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\rthreads\rsemaphore.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\rthreads\rthreads.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\streams\file_stream.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libretro-common\streams\memory_stream.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\lua-engine.cpp" />
     <ClCompile Include="..\..\matrix.cpp" />
     <ClCompile Include="..\..\mc.cpp" />
@@ -275,85 +215,159 @@
     <ClCompile Include="..\..\texcache.cpp" />
     <ClCompile Include="..\..\thumb_instructions.cpp" />
     <ClCompile Include="..\..\utils\advanscene.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\assembler.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\assert.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\buffer.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\compiler.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\compilercontext.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\compilerfunc.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\compileritem.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\context.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\cpuinfo.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\defs.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\func.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\logger.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\memorymanager.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\memorymarker.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\operand.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\stringbuilder.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\stringutil.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\virtualmemory.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\core\zonememory.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\x86\x86assembler.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\x86\x86compiler.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\x86\x86compilercontext.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\x86\x86compilerfunc.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\x86\x86compileritem.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\x86\x86cpuinfo.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\x86\x86defs.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\x86\x86func.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\x86\x86operand.cpp" />
-    <ClCompile Include="..\..\utils\AsmJit\x86\x86util.cpp" />
-    <ClCompile Include="..\..\utils\colorspacehandler\colorspacehandler.cpp" />
+    <ClCompile Include="..\..\utils\AsmJit\core\assembler.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\assert.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\buffer.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\compiler.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\compilercontext.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\compilerfunc.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\compileritem.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\context.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\cpuinfo.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\defs.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\func.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\logger.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\memorymanager.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\memorymarker.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\operand.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\stringbuilder.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\stringutil.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\virtualmemory.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\core\zonememory.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\x86\x86assembler.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\x86\x86compiler.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\x86\x86compilercontext.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\x86\x86compilerfunc.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\x86\x86compileritem.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\x86\x86cpuinfo.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\x86\x86defs.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\x86\x86func.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\x86\x86operand.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\AsmJit\x86\x86util.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\colorspacehandler\colorspacehandler.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\utils\colorspacehandler\colorspacehandler_AltiVec.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\utils\colorspacehandler\colorspacehandler_AVX2.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\utils\colorspacehandler\colorspacehandler_SSE2.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\utils\datetime.cpp" />
-    <ClCompile Include="..\..\utils\dlditool.cpp" />
+    <ClCompile Include="..\..\utils\dlditool.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\utils\emufat.cpp" />
     <ClCompile Include="..\..\utils\fsnitro.cpp" />
-    <ClCompile Include="..\..\utils\libfat\cache.cpp" />
-    <ClCompile Include="..\..\utils\libfat\directory.cpp" />
-    <ClCompile Include="..\..\utils\libfat\disc.cpp" />
-    <ClCompile Include="..\..\utils\libfat\fatdir.cpp" />
-    <ClCompile Include="..\..\utils\libfat\fatfile.cpp" />
-    <ClCompile Include="..\..\utils\libfat\filetime.cpp" />
-    <ClCompile Include="..\..\utils\libfat\file_allocation_table.cpp" />
-    <ClCompile Include="..\..\utils\libfat\libfat.cpp" />
-    <ClCompile Include="..\..\utils\libfat\libfat_public_api.cpp" />
-    <ClCompile Include="..\..\utils\libfat\lock.cpp" />
-    <ClCompile Include="..\..\utils\libfat\partition.cpp" />
-    <ClCompile Include="..\..\utils\tinyxml\tinystr.cpp" />
-    <ClCompile Include="..\..\utils\tinyxml\tinyxml.cpp" />
-    <ClCompile Include="..\..\utils\tinyxml\tinyxmlerror.cpp" />
-    <ClCompile Include="..\..\utils\tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="..\..\utils\libfat\cache.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\libfat\directory.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\libfat\disc.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\libfat\fatdir.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\libfat\fatfile.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\libfat\filetime.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\libfat\file_allocation_table.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\libfat\libfat.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\libfat\libfat_public_api.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\libfat\lock.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\libfat\partition.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\tinyxml\tinystr.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\tinyxml\tinyxml.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\tinyxml\tinyxmlerror.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\tinyxml\tinyxmlparser.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\utils\vfat.cpp" />
     <ClCompile Include="..\..\version.cpp" />
     <ClCompile Include="..\..\wifi.cpp" />
@@ -366,24 +380,60 @@
     <ClCompile Include="..\..\utils\guid.cpp" />
     <ClCompile Include="..\..\utils\task.cpp" />
     <ClCompile Include="..\..\utils\xstring.cpp" />
-    <ClCompile Include="..\..\utils\decrypt\crc.cpp" />
-    <ClCompile Include="..\..\utils\decrypt\decrypt.cpp" />
-    <ClCompile Include="..\..\utils\decrypt\header.cpp" />
-    <ClCompile Include="..\..\metaspu\metaspu.cpp" />
-    <ClCompile Include="..\..\metaspu\SndOut.cpp" />
-    <ClCompile Include="..\..\metaspu\Timestretcher.cpp" />
-    <ClCompile Include="..\..\metaspu\win32\ConfigSoundtouch.cpp" />
-    <ClCompile Include="..\..\metaspu\SoundTouch\3dnow_win.cpp" />
-    <ClCompile Include="..\..\metaspu\SoundTouch\AAFilter.cpp" />
-    <ClCompile Include="..\..\metaspu\SoundTouch\cpu_detect_x86_win.cpp" />
-    <ClCompile Include="..\..\metaspu\SoundTouch\FIFOSampleBuffer.cpp" />
-    <ClCompile Include="..\..\metaspu\SoundTouch\FIRFilter.cpp" />
-    <ClCompile Include="..\..\metaspu\SoundTouch\mmx_optimized.cpp" />
-    <ClCompile Include="..\..\metaspu\SoundTouch\RateTransposer.cpp" />
-    <ClCompile Include="..\..\metaspu\SoundTouch\SoundTouch.cpp" />
-    <ClCompile Include="..\..\metaspu\SoundTouch\sse_optimized.cpp" />
-    <ClCompile Include="..\..\metaspu\SoundTouch\TDStretch.cpp" />
-    <ClCompile Include="..\..\metaspu\SoundTouch\WavFile.cpp" />
+    <ClCompile Include="..\..\utils\decrypt\crc.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\decrypt\decrypt.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\decrypt\header.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\metaspu.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\SndOut.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\Timestretcher.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\win32\ConfigSoundtouch.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\SoundTouch\3dnow_win.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\SoundTouch\AAFilter.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\SoundTouch\cpu_detect_x86_win.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\SoundTouch\FIFOSampleBuffer.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\SoundTouch\FIRFilter.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\SoundTouch\mmx_optimized.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\SoundTouch\RateTransposer.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\SoundTouch\SoundTouch.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\SoundTouch\sse_optimized.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\SoundTouch\TDStretch.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\metaspu\SoundTouch\WavFile.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\modules\Disassembler.cpp" />
     <ClCompile Include="..\modules\osd\agg\aggdraw.cpp" />
     <ClCompile Include="..\modules\osd\agg\agg_osd.cpp" />
@@ -393,103 +443,241 @@
     <ClCompile Include="colorctrl.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="CWindow.cpp" />
-    <ClCompile Include="ddraw.cpp" />
+    <ClCompile Include="directdraw.cpp" />
     <ClCompile Include="desmume.pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">desmume</PrecompiledHeaderFile>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">desmume</PrecompiledHeaderFile>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">desmume</PrecompiledHeaderFile>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">desmume</PrecompiledHeaderFile>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">desmume</PrecompiledHeaderFile>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">desmume</PrecompiledHeaderFile>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">desmume</PrecompiledHeaderFile>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">desmume</PrecompiledHeaderFile>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>desmume</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="display.cpp" />
     <ClCompile Include="FEX_Interface.cpp" />
-    <ClCompile Include="File_Extractor\7z_C\7zAlloc.c" />
-    <ClCompile Include="File_Extractor\7z_C\7zBuf.c" />
-    <ClCompile Include="File_Extractor\7z_C\7zBuf2.c" />
-    <ClCompile Include="File_Extractor\7z_C\7zCrc.c" />
-    <ClCompile Include="File_Extractor\7z_C\7zCrcOpt.c" />
-    <ClCompile Include="File_Extractor\7z_C\7zDec.c" />
-    <ClCompile Include="File_Extractor\7z_C\7zDecode.c" />
-    <ClCompile Include="File_Extractor\7z_C\7zExtract.c" />
-    <ClCompile Include="File_Extractor\7z_C\7zFile.c" />
-    <ClCompile Include="File_Extractor\7z_C\7zIn.c" />
-    <ClCompile Include="File_Extractor\7z_C\7zStream.c" />
-    <ClCompile Include="File_Extractor\7z_C\Alloc.c" />
-    <ClCompile Include="File_Extractor\7z_C\Bcj2.c" />
-    <ClCompile Include="File_Extractor\7z_C\Bra.c" />
-    <ClCompile Include="File_Extractor\7z_C\Bra86.c" />
-    <ClCompile Include="File_Extractor\7z_C\BraIA64.c" />
-    <ClCompile Include="File_Extractor\7z_C\CpuArch.c" />
-    <ClCompile Include="File_Extractor\7z_C\Delta.c" />
-    <ClCompile Include="File_Extractor\7z_C\LzFind.c" />
-    <ClCompile Include="File_Extractor\7z_C\LzFindMt.c" />
-    <ClCompile Include="File_Extractor\7z_C\Lzma2Dec.c" />
-    <ClCompile Include="File_Extractor\7z_C\Lzma2Enc.c" />
-    <ClCompile Include="File_Extractor\7z_C\Lzma86Dec.c" />
-    <ClCompile Include="File_Extractor\7z_C\Lzma86Enc.c" />
-    <ClCompile Include="File_Extractor\7z_C\LzmaDec.c" />
-    <ClCompile Include="File_Extractor\7z_C\LzmaEnc.c" />
-    <ClCompile Include="File_Extractor\7z_C\LzmaLib.c" />
-    <ClCompile Include="File_Extractor\7z_C\MtCoder.c" />
-    <ClCompile Include="File_Extractor\7z_C\Ppmd7.c" />
-    <ClCompile Include="File_Extractor\7z_C\Ppmd7Dec.c" />
-    <ClCompile Include="File_Extractor\7z_C\Ppmd7Enc.c" />
-    <ClCompile Include="File_Extractor\7z_C\win32\Threads.c" />
-    <ClCompile Include="File_Extractor\fex\Binary_Extractor.cpp" />
-    <ClCompile Include="File_Extractor\fex\blargg_common.cpp" />
-    <ClCompile Include="File_Extractor\fex\blargg_errors.cpp" />
-    <ClCompile Include="File_Extractor\fex\Data_Reader.cpp" />
-    <ClCompile Include="File_Extractor\fex\fex.cpp" />
-    <ClCompile Include="File_Extractor\fex\File_Extractor.cpp" />
-    <ClCompile Include="File_Extractor\fex\Gzip_Extractor.cpp" />
-    <ClCompile Include="File_Extractor\fex\Gzip_Reader.cpp" />
-    <ClCompile Include="File_Extractor\fex\Rar_Extractor.cpp" />
-    <ClCompile Include="File_Extractor\fex\Zip7_Extractor.cpp" />
-    <ClCompile Include="File_Extractor\fex\Zip_Extractor.cpp" />
-    <ClCompile Include="File_Extractor\fex\Zlib_Inflater.cpp" />
-    <ClCompile Include="File_Extractor\unrar\archive.cpp" />
-    <ClCompile Include="File_Extractor\unrar\arcread.cpp" />
-    <ClCompile Include="File_Extractor\unrar\blake2s.cpp" />
-    <ClCompile Include="File_Extractor\unrar\blake2sp.cpp" />
-    <ClCompile Include="File_Extractor\unrar\blake2s_sse.cpp" />
-    <ClCompile Include="File_Extractor\unrar\coder.cpp" />
-    <ClCompile Include="File_Extractor\unrar\crc.cpp" />
-    <ClCompile Include="File_Extractor\unrar\encname.cpp" />
-    <ClCompile Include="File_Extractor\unrar\extract.cpp" />
-    <ClCompile Include="File_Extractor\unrar\getbits.cpp" />
-    <ClCompile Include="File_Extractor\unrar\hash.cpp" />
-    <ClCompile Include="File_Extractor\unrar\headers.cpp" />
-    <ClCompile Include="File_Extractor\unrar\model.cpp" />
-    <ClCompile Include="File_Extractor\unrar\pathfn.cpp" />
-    <ClCompile Include="File_Extractor\unrar\rarvm.cpp" />
-    <ClCompile Include="File_Extractor\unrar\rarvmtbl.cpp" />
-    <ClCompile Include="File_Extractor\unrar\rawread.cpp" />
-    <ClCompile Include="File_Extractor\unrar\secpassword.cpp" />
-    <ClCompile Include="File_Extractor\unrar\strfn.cpp" />
-    <ClCompile Include="File_Extractor\unrar\suballoc.cpp" />
-    <ClCompile Include="File_Extractor\unrar\timefn.cpp" />
-    <ClCompile Include="File_Extractor\unrar\unicode.cpp" />
-    <ClCompile Include="File_Extractor\unrar\unpack.cpp" />
-    <ClCompile Include="File_Extractor\unrar\unpack15.cpp" />
-    <ClCompile Include="File_Extractor\unrar\unpack20.cpp" />
-    <ClCompile Include="File_Extractor\unrar\unpack30.cpp" />
-    <ClCompile Include="File_Extractor\unrar\unpack50.cpp" />
-    <ClCompile Include="File_Extractor\unrar\unpack50frag.cpp" />
-    <ClCompile Include="File_Extractor\unrar\unpackinline.cpp" />
-    <ClCompile Include="File_Extractor\unrar\unrar.cpp" />
-    <ClCompile Include="File_Extractor\unrar\unrar_misc.cpp" />
-    <ClCompile Include="File_Extractor\unrar\unrar_open.cpp" />
+    <ClCompile Include="File_Extractor\7z_C\7zAlloc.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\7zBuf.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\7zBuf2.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\7zCrc.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\7zCrcOpt.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\7zDec.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\7zDecode.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\7zExtract.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\7zFile.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\7zIn.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\7zStream.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\Alloc.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\Bcj2.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\Bra.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\Bra86.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\BraIA64.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\CpuArch.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\Delta.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\LzFind.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\LzFindMt.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\Lzma2Dec.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\Lzma2Enc.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\Lzma86Dec.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\Lzma86Enc.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\LzmaDec.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\LzmaEnc.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\LzmaLib.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\MtCoder.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\Ppmd7.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\Ppmd7Dec.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\Ppmd7Enc.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\7z_C\win32\Threads.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\fex\Binary_Extractor.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\fex\blargg_common.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\fex\blargg_errors.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\fex\Data_Reader.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\fex\fex.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\fex\File_Extractor.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\fex\Gzip_Extractor.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\fex\Gzip_Reader.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\fex\Rar_Extractor.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\fex\Zip7_Extractor.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\fex\Zip_Extractor.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\fex\Zlib_Inflater.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\archive.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\arcread.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\blake2s.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\blake2sp.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\blake2s_sse.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\coder.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\crc.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\encname.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\extract.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\getbits.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\hash.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\headers.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\model.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\pathfn.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\rarvm.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\rarvmtbl.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\rawread.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\secpassword.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\strfn.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\suballoc.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\timefn.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\unicode.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\unpack.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\unpack15.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\unpack20.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\unpack30.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\unpack50.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\unpack50frag.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\unpackinline.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\unrar.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\unrar_misc.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="File_Extractor\unrar\unrar_open.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="FirmConfig.cpp" />
     <ClCompile Include="fsnitroView.cpp" />
     <ClCompile Include="gbaslot_config.cpp" />
@@ -545,34 +733,13 @@
     <ClInclude Include="..\..\types.h" />
     <ClInclude Include="..\..\utils\bits.h" />
     <ClInclude Include="..\..\utils\colorspacehandler\colorspacehandler_AltiVec.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\utils\colorspacehandler\colorspacehandler_AVX2.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\utils\colorspacehandler\colorspacehandler_SSE2.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\version.h" />
     <ClInclude Include="..\..\armcpu.h" />
@@ -712,7 +879,7 @@
     <ClInclude Include="colorctrl.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="CWindow.h" />
-    <ClInclude Include="ddraw.h" />
+    <ClInclude Include="directdraw.h" />
     <ClInclude Include="desmume.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="FEX_Interface.h" />
@@ -837,61 +1004,10 @@
     <None Include="bitmaps\IDB_STOP.bmp" />
     <None Include="desmume" />
     <None Include="DeSmuME.ico" />
-    <CustomBuild Include="directx\directx.7z">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">call un7z_and_touch.bat directx\directx.7z .libs\directx*
-</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">7z.exe;un7z_and_touch.bat;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.libs\directx.tag;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">call un7z_and_touch.bat directx\directx.7z .libs\directx*
-</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">7z.exe;un7z_and_touch.bat;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.libs\directx.tag;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">call un7z_and_touch.bat directx\directx.7z .libs\directx*
-</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">7z.exe;un7z_and_touch.bat;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">.libs\directx.tag;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">call un7z_and_touch.bat directx\directx.7z .libs\directx*
-</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">call un7z_and_touch.bat directx\directx.7z .libs\directx*
-</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">7z.exe;un7z_and_touch.bat;%(AdditionalInputs)</AdditionalInputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">7z.exe;un7z_and_touch.bat;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.libs\directx.tag;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">.libs\directx.tag;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">call un7z_and_touch.bat directx\directx.7z .libs\directx*
-</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">call un7z_and_touch.bat directx\directx.7z .libs\directx*
-</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">7z.exe;un7z_and_touch.bat;%(AdditionalInputs)</AdditionalInputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">7z.exe;un7z_and_touch.bat;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.libs\directx.tag;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">.libs\directx.tag;%(Outputs)</Outputs>
-    </CustomBuild>
     <CustomBuild Include="lua\lua.7z">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">call un7z_and_touch.bat lua\lua.7z .libs\win32\lua* .libs\x64\lua* .libs\lua.tag</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">7z.exe;un7z_and_touch.bat</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.libs\lua.tag;</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">call un7z_and_touch.bat lua\lua.7z .libs\win32\lua* .libs\x64\lua* .libs\lua.tag</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">7z.exe;un7z_and_touch.bat</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.libs\lua.tag;</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">call un7z_and_touch.bat lua\lua.7z .libs\win32\lua* .libs\x64\lua* .libs\lua.tag</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">7z.exe;un7z_and_touch.bat</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">.libs\lua.tag;</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">call un7z_and_touch.bat lua\lua.7z .libs\win32\lua* .libs\x64\lua* .libs\lua.tag</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">call un7z_and_touch.bat lua\lua.7z .libs\win32\lua* .libs\x64\lua* .libs\lua.tag</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">7z.exe;un7z_and_touch.bat</AdditionalInputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">7z.exe;un7z_and_touch.bat</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.libs\lua.tag;</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">.libs\lua.tag;</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">call un7z_and_touch.bat lua\lua.7z .libs\win32\lua* .libs\x64\lua* .libs\lua.tag</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">call un7z_and_touch.bat lua\lua.7z .libs\win32\lua* .libs\x64\lua* .libs\lua.tag</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">7z.exe;un7z_and_touch.bat</AdditionalInputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">7z.exe;un7z_and_touch.bat</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.libs\lua.tag;</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">.libs\lua.tag;</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">call un7z_and_touch.bat lua\lua.7z .libs\win32\lua* .libs\x64\lua* .libs\lua.tag</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">.libs\lua.tag;</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">7z.exe;un7z_and_touch.bat</AdditionalInputs>
+      <Command>call un7z_and_touch.bat lua\lua.7z .libs\win32\lua* .libs\x64\lua* .libs\lua.tag</Command>
+      <AdditionalInputs>7z.exe;un7z_and_touch.bat</AdditionalInputs>
+      <Outputs>.libs\lua.tag;</Outputs>
     </CustomBuild>
     <None Include="File_Extractor\7z_C\7zC.txt" />
     <None Include="File_Extractor\7z_C\changes.txt" />

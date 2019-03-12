@@ -16,6 +16,8 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "importSave.h"
 
 #include "types.h"

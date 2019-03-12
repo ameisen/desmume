@@ -24,13 +24,9 @@
 	documented on GBATek.
 */
 
-#include "mic.h"
+#include "desmume"
 
-#include <mmsystem.h>
-#include "Platforms/common.h"
-#include <string.h>
-#include <vector>
-#include <fstream>
+#include "mic.h"
 
 #include "types.h"
 #include "NDSSystem.h"

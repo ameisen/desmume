@@ -18,6 +18,8 @@
 //this file contains the components used for emulating standard gamecard "MC" devices (eeprom, fram, flash)
 //this is largely done by accessing the BackupDevice resources in the core emulator
 
+#include "desmume"
+
 #include "slot1comp_mc.h"
 
 #include "../MMU.h"

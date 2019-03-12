@@ -21,6 +21,8 @@
 //									NTR-UORE-0
 //									- 128Mbit
 
+#include "desmume"
+
 #include "slot1comp_rom.h"
 #include "slot1comp_protocol.h"
 

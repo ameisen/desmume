@@ -16,10 +16,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ginfo.h"
+#include "desmume"
 
-#include <stdio.h>
-#include <commctrl.h>
+#include "ginfo.h"
 
 #include "MMU.h"
 #include "NDSSystem.h"

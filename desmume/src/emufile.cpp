@@ -22,9 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "emufile.h"
+#include "desmume"
 
-#include <vector>
+#include "emufile.h"
 
 inline u64 double_to_u64(double d)
 {

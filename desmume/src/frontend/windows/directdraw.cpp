@@ -15,9 +15,12 @@ You should have received a copy of the GNU General Public License
 along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ddraw.h"
+#include "desmume"
 
-#include "directx/ddraw.h"
+#include "directdraw.h"
+
+#include <ddraw.h>
+
 #include "GPU.h"
 #include "types.h"
 

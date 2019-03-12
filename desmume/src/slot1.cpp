@@ -26,7 +26,7 @@ Since GCROMCTRL[26:24] can't represent 'data block size' of 1 or 2, it is assume
 
 //TODO - create a Slot1_TurboRom which we can select when booting from fakebios/nonfirmware and which would provide a useful service to people porting to tighter platforms by bypassing largely useless cruft
 
-#include <string>
+#include "desmume"
 
 #include "types.h"
 #include "slot1.h"

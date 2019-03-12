@@ -15,9 +15,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "cheatsWin.h"
+#include "desmume"
 
-#include <commctrl.h>
+#include "cheatsWin.h"
 
 #include "common.h"
 #include "cheatSystem.h"

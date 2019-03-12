@@ -16,15 +16,12 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "agg_osd.h"
 #include "driver.h"
 #include "GPU.h"
 #include "mem.h"
-#include <string.h> //mem funcs
-#include <stdarg.h> //va_start, etc
-#include <sstream>
-#include <stdio.h>
-#include <time.h>
 #include "debug.h"
 
 #include "aggdraw.h"
@@ -34,10 +31,8 @@
 #include "mic.h"
 #include "saves.h"
 
-#ifdef _MSC_VER
-#	include "Platforms/common.h"
-#else
-#include <sys/time.h>
+#ifndef _MSC_VER
+#	include <sys/time.h>
 #endif
 
 bool HudEditorMode = false;

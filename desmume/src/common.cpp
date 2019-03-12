@@ -17,18 +17,11 @@
 
 //TODO - move this into ndssystem where it belongs probably
 
+#include "desmume"
+
 #include "common.h"
 
-#ifndef _MSC_VER
-#include <stdint.h>
-#endif
-
-#include <string.h>
-#include <string>
-#include <stdarg.h>
 #include <zlib.h>
-#include <stdlib.h>
-#include <map>
 
 static std::map<void *, void *> _alignedPtrList; // Key: Aligned pointer / Value: Original pointer
 

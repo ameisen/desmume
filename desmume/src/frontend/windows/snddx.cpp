@@ -16,12 +16,11 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "snddx.h"
 
-#include <stdio.h>
-#include "Platforms/common.h"
-#include <mmsystem.h>
-#include "directx/dsound.h"
+#include <dsound.h>
 
 #ifdef __MINGW32__
 // I have to do this because for some reason because the dxerr8.h header is fubared
@@ -30,8 +29,15 @@ const char*  __stdcall DXGetErrorString8A(HRESULT hr);
 const char*  __stdcall DXGetErrorDescription8A(HRESULT hr);
 #define DXGetErrorDescription8 DXGetErrorDescription8A
 #else
-#include "directx/dxerr8.h"
+//#	include "dxerr.h"
 #endif
+
+// TODO : Fix this. These functions no longer exist in their ASCII forms. DXUT is now open source so we can pull it at configure time,
+// but we will need to convert it to multibyte here, or convert all of this to unicode.
+template <typename T>
+static const char* DXGetErrorString(const T& __restrict) { return ""; }
+template <typename T>
+static const char* DXGetErrorDescription(const T& __restrict) { return ""; }
 
 #include "SPU.h"
 #include "CWindow.h"
@@ -98,17 +104,18 @@ int SNDDXInit(int buffersize)
 	WAVEFORMATEX wfx;
 	HRESULT ret;
 	char tempstr[512];
+	char tempstr_err[512];
 
 	if (FAILED(ret = DirectSoundCreate8(NULL, &lpDS8, NULL)))
 	{
-		sprintf(tempstr, "DirectSound8Create error: %s - %s", DXGetErrorString8(ret), DXGetErrorDescription8(ret));
+		sprintf(tempstr, "DirectSound8Create error: %s - %s", DXGetErrorString(ret), DXGetErrorDescription(ret));
 		MessageBox (NULL, tempstr, "Error",  MB_OK | MB_ICONINFORMATION);
 		return -1;
 	}
 
 	if (FAILED(ret = lpDS8->SetCooperativeLevel(MainWindow->getHWnd(), DSSCL_PRIORITY)))
 	{
-		sprintf(tempstr, "IDirectSound8_SetCooperativeLevel error: %s - %s", DXGetErrorString8(ret), DXGetErrorDescription8(ret));
+		sprintf(tempstr, "IDirectSound8_SetCooperativeLevel error: %s - %s", DXGetErrorString(ret), DXGetErrorDescription(ret));
 		MessageBox (NULL, tempstr, "Error",  MB_OK | MB_ICONINFORMATION);
 		return -1;
 	}
@@ -121,7 +128,7 @@ int SNDDXInit(int buffersize)
 
 	if (FAILED(ret = lpDS8->CreateSoundBuffer(&dsbdesc, &lpDSB, NULL)))
 	{
-		sprintf(tempstr, "Error when creating primary sound buffer: %s - %s", DXGetErrorString8(ret), DXGetErrorDescription8(ret));
+		sprintf(tempstr, "Error when creating primary sound buffer: %s - %s", DXGetErrorString(ret), DXGetErrorDescription(ret));
 		MessageBox (NULL, tempstr, "Error",  MB_OK | MB_ICONINFORMATION);
 		return -1;
 	}
@@ -139,7 +146,7 @@ int SNDDXInit(int buffersize)
 
 	if (FAILED(ret = lpDSB->SetFormat(&wfx)))
 	{
-		sprintf(tempstr, "IDirectSoundBuffer8_SetFormat error: %s - %s", DXGetErrorString8(ret), DXGetErrorDescription8(ret));
+		sprintf(tempstr, "IDirectSoundBuffer8_SetFormat error: %s - %s", DXGetErrorString(ret), DXGetErrorDescription(ret));
 		MessageBox (NULL, tempstr, "Error",  MB_OK | MB_ICONINFORMATION);
 		return -1;
 	}
@@ -166,14 +173,14 @@ int SNDDXInit(int buffersize)
 
 			if (FAILED(ret = lpDS8->CreateSoundBuffer(&dsbdesc, &lpDSB2, NULL)))
 			{
-				sprintf(tempstr, "Error when creating secondary sound buffer: %s - %s", DXGetErrorString8(ret), DXGetErrorDescription8(ret));
+				sprintf(tempstr, "Error when creating secondary sound buffer: %s - %s", DXGetErrorString(ret), DXGetErrorDescription(ret));
 				MessageBox (NULL, tempstr, "Error",  MB_OK | MB_ICONINFORMATION);
 				return -1;
 			}
 		}
 		else
 		{
-			sprintf(tempstr, "Error when creating secondary sound buffer: %s - %s", DXGetErrorString8(ret), DXGetErrorDescription8(ret));
+			sprintf(tempstr, "Error when creating secondary sound buffer: %s - %s", DXGetErrorString(ret), DXGetErrorDescription(ret));
 			MessageBox (NULL, tempstr, "Error",  MB_OK | MB_ICONINFORMATION);
 			return -1;
 		}

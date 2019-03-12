@@ -16,12 +16,12 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "render3D.h"
 
-#include <string.h>
-
 #ifdef ENABLE_SSE2
-#include <emmintrin.h>
+#	include <emmintrin.h>
 #endif
 
 #include "utils/bits.h"

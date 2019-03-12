@@ -15,14 +15,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define WIN32_LEAN_AND_MEAN
-#include "movie.h"
+#include "desmume"
 
-#include <assert.h>
-#include <limits.h>
-#include <ctype.h>
-#include <time.h>
-#include <string>
+#include "movie.h"
 
 #include "utils/guid.h"
 #include "utils/xstring.h"

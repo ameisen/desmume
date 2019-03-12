@@ -16,9 +16,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "matrixView.h"
+#include "desmume"
 
-#include <commctrl.h>
+#include "matrixView.h"
 
 #include "debug.h"
 #include "gfx3d.h"

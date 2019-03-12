@@ -17,12 +17,7 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <string>
-#include <string.h>
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stack>
+#include <desmume>
 
 #include "../types.h"
 #include "../debug.h"

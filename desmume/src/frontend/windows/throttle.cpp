@@ -19,9 +19,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "throttle.h"
+#include "desmume"
 
-#include "Platforms/common.h"
+#include "throttle.h"
 
 #include "types.h"
 #include "debug.h"

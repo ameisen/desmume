@@ -16,12 +16,13 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "tileView.h"
 
 #include "MMU.h"
 #include "GPU.h"
 
-#include "commctrl.h"
 #include "resource.h"
 #include "debug.h"
 #include "main.h"

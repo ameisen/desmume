@@ -15,7 +15,7 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <string.h>
+#include "desmume"
 
 #include "types.h"
 #include "Database.h"

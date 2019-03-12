@@ -16,11 +16,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "memView.h"
+#include "desmume"
 
-#include <algorithm>
-#include <windowsx.h>
-#include <commctrl.h>
+#include "memView.h"
 
 #include "NDSSystem.h"
 #include "emufile.h"

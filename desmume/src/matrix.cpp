@@ -16,11 +16,8 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
-#include <assert.h>
+#include "desmume"
+
 #include "matrix.h"
 #include "MMU.h"
 

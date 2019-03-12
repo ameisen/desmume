@@ -47,13 +47,10 @@
 // during these sporadic "setup" steps to achieve an all-around faster per-update speed.
 // (You can test this case by performing the search: Modulo 2 Is Specific Address 0)
 
+#include "desmume"
+
 #include "ram_search.h"
 #include "ramwatch.h"
-
-#include <assert.h>
-#include <commctrl.h>
-#include <list>
-#include <vector>
 
 #include "NDSSystem.h"
 #include "MMU.h"

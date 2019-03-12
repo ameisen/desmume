@@ -16,11 +16,8 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
 
-#include <string.h>
-#include <stdlib.h>
-#include <algorithm>
-#include <math.h>
 #include <zlib.h>
 
 #include <features/features_cpu.h>

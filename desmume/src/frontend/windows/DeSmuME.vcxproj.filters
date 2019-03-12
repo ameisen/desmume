@@ -927,9 +927,6 @@
     <ClCompile Include="..\..\utils\colorspacehandler\colorspacehandler_AltiVec.cpp">
       <Filter>utils\colorspacehandler</Filter>
     </ClCompile>
-    <ClCompile Include="ddraw.cpp">
-      <Filter>frontend\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="ogl_display.cpp">
       <Filter>frontend\Windows</Filter>
     </ClCompile>
@@ -937,6 +934,9 @@
       <Filter>frontend\Windows</Filter>
     </ClCompile>
     <ClCompile Include="desmume.pch.cpp" />
+    <ClCompile Include="directdraw.cpp">
+      <Filter>frontend\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\utils\guid.h">
@@ -1626,9 +1626,6 @@
     <ClInclude Include="..\..\utils\colorspacehandler\colorspacehandler_SSE2.h">
       <Filter>utils\colorspacehandler</Filter>
     </ClInclude>
-    <ClInclude Include="ddraw.h">
-      <Filter>frontend\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="ogl_display.h">
       <Filter>frontend\Windows</Filter>
     </ClInclude>
@@ -1642,6 +1639,9 @@
       <Filter>Platforms\Windows</Filter>
     </ClInclude>
     <ClInclude Include="desmume.h" />
+    <ClInclude Include="directdraw.h">
+      <Filter>frontend\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bitmap1.bmp">
@@ -1729,9 +1729,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="directx\directx.7z">
-      <Filter>frontend\Windows\libs</Filter>
-    </CustomBuild>
     <CustomBuild Include="lua\lua.7z">
       <Filter>frontend\Windows\libs</Filter>
     </CustomBuild>

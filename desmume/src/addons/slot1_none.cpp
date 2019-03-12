@@ -15,6 +15,7 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
 #include "../slot1.h"
 
 class Slot1_None : public ISlot1Interface

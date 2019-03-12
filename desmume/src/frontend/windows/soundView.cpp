@@ -15,13 +15,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "soundView.h"
+#include "desmume"
 
-#include <assert.h>
-#include <commctrl.h>
-#include "Platforms/common.h"
-#include <windowsx.h>
-#include <algorithm>
+#include "soundView.h"
 
 #include "NDSSystem.h"
 #include "debug.h"

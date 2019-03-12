@@ -15,9 +15,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "slot1comp_protocol.h"
+#include "desmume"
 
-#include <time.h>
+#include "slot1comp_protocol.h"
 
 #include "../slot1.h"
 #include "../NDSSystem.h"

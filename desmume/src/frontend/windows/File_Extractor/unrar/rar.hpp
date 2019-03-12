@@ -59,7 +59,16 @@ struct Rar_Error_Handler
 };
 
 // throw spec is mandatory in ISO C++ if operator new can return NULL
-#if __cplusplus >= 199711 || __GNUC__ >= 3
+#define UNRAR_PRE_NOTHROW
+#if __cplusplus >= 201103L
+#	ifdef _MSC_VER
+#		undef UNRAR_PRE_NOTHROW
+#		define UNRAR_PRE_NOTHROW __declspec(nothrow)
+#		define UNRAR_NOTHROW noexcept
+#	else
+#		define UNRAR_NOTHROW noexcept
+#	endif
+#elif __cplusplus >= 199711 || __GNUC__ >= 3
 	#define UNRAR_NOTHROW throw ()
 #else
 	#define UNRAR_NOTHROW
@@ -68,9 +77,10 @@ struct Rar_Error_Handler
 struct Rar_Allocator
 {
 	// provides allocator that doesn't throw an exception on failure
-	static void operator delete ( void* p ) { free( p ); }
-	static void* operator new ( size_t s ) UNRAR_NOTHROW { return malloc( s ); }
-	static void* operator new ( size_t, void* p ) UNRAR_NOTHROW { return p; }
+	static UNRAR_PRE_NOTHROW void operator delete ( void* p ) UNRAR_NOTHROW { free( p ); }
+	static UNRAR_PRE_NOTHROW void* operator new ( size_t s ) UNRAR_NOTHROW { return malloc( s ); }
+	static UNRAR_PRE_NOTHROW void* operator new ( size_t, void* p ) UNRAR_NOTHROW { return p; }
+	static UNRAR_PRE_NOTHROW void operator delete (void* p, size_t) UNRAR_NOTHROW { free(p); }
 };
 
 //// os.hpp

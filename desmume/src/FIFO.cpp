@@ -17,9 +17,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "FIFO.h"
+#include "desmume"
 
-#include <string.h>
+#include "FIFO.h"
 
 #include "armcpu.h"
 #include "debug.h"

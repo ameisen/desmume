@@ -17,6 +17,8 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "types.h"
 
 #ifdef HAVE_JIT
@@ -27,10 +29,6 @@
 #ifdef HOST_WINDOWS
 // **** Windows port
 #else
-#include <sys/mman.h>
-#include <errno.h>
-#include <unistd.h>
-#include <stddef.h>
 #define HAVE_STATIC_CODE_BUFFER
 #endif
 
@@ -46,10 +44,6 @@
 
 #define LOG_JIT_LEVEL 0
 #define PROFILER_JIT_LEVEL 0
-
-#if (PROFILER_JIT_LEVEL > 0)
-#include <algorithm>
-#endif
 
 using namespace AsmJit;
 

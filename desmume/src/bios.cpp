@@ -20,9 +20,10 @@
 //it renders the use of bios files generally unnecessary.
 //it turns out that they're not too complex, although of course the timings will be all wrong here.
 
+#include "desmume"
+
 #include "armcpu.h"
 #include "cp15.h"
-#include <math.h>
 #include "MMU.h"
 #include "debug.h"
 #include "registers.h"

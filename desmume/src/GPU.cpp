@@ -18,13 +18,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "GPU.h"
+#include "desmume"
 
-#include <assert.h>
-#include <stdlib.h>
-#include <string.h>
-#include <algorithm>
-#include <iostream>
+#include "GPU.h"
 
 #include "common.h"
 #include "MMU.h"

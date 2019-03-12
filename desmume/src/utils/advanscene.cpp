@@ -15,8 +15,7 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <stdio.h>
-#include <time.h>
+#include <desmume>
 
 #define TIXML_USE_STL
 #include "tinyxml/tinyxml.h"

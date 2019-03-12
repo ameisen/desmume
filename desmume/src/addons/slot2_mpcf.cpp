@@ -17,11 +17,7 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <string>
-#include <string.h>
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "desmume"
 
 #include "../slot2.h"
 #include "../debug.h"

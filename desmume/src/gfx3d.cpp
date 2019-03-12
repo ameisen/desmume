@@ -33,13 +33,9 @@
 //from MatrixStackSetStackPosition: "once upon a time, we tried clamping to the size. this utterly broke sims 2 apartment pets. changing to wrap around made it work perfectly"
 //Water Horse Legend Of The Deep does seem to exercise the texture matrix stack, which does probably need to exist *but I'm not 100% sure)
 
-#include "gfx3d.h"
+#include "desmume"
 
-#include <assert.h>
-#include <math.h>
-#include <string.h>
-#include <algorithm>
-#include <queue>
+#include "gfx3d.h"
 
 #include "armcpu.h"
 #include "debug.h"

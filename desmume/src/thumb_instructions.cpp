@@ -17,10 +17,10 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "armcpu.h"
 #include "instructions.h"
-
-#include <assert.h>
 
 #include "bios.h"
 #include "debug.h"

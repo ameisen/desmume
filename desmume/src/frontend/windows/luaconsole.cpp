@@ -15,13 +15,8 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <assert.h>
-#include <process.h>
-#include <vector>
-#include <map>
-#include <string>
-#include <algorithm>
-#include "Platforms/common.h"
+#include "desmume"
+
 #include "driver.h"
 #include "lua-engine.h"
 

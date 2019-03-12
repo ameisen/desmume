@@ -1,3 +1,5 @@
+#include "desmume"
+
 #include "filter.h"
 #include "types.h"
 

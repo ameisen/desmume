@@ -18,13 +18,10 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "ramwatch.h"
 #include "ram_search.h"
-
-#include <assert.h>
-#include "Platforms/common.h"
-#include <commctrl.h>
-#include <string>
 
 #include "NDSSystem.h"
 #include "path.h"

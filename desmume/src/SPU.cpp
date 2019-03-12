@@ -19,17 +19,12 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
 
 #define _USE_MATH_DEFINES
-#include <math.h>
 #ifndef M_PI
-#define M_PI 3.1415926535897932386
+#	define M_PI 3.1415926535897932386
 #endif
-
-#include <stdlib.h>
-#include <string.h>
-#include <queue>
-#include <vector>
 
 #include "debug.h"
 #include "driver.h"

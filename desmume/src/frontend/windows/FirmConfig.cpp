@@ -16,11 +16,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "FirmConfig.h"
+#include "desmume"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "FirmConfig.h"
 
 #include "NDSSystem.h"
 #include "firmware.h"

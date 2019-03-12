@@ -16,9 +16,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mapView.h"
+#include "desmume"
 
-#include <commctrl.h>
+#include "mapView.h"
 
 #include "GPU.h"
 #include "MMU.h"

@@ -21,23 +21,13 @@
 
 //TODO - rumble is broken. hopefully nobody will notice
 
+#include "desmume"
+
 #include "inputdx.h"
 
 #ifdef __MINGW32__
 #define _WIN32_IE 0x0501
 #define _WIN32_WINNT 0x0501
-#endif
-
-#include <tchar.h>
-#include <io.h>
-#include <string>
-
-#if (((defined(_MSC_VER) && _MSC_VER >= 1300)) || defined(__MINGW32__))
-	// both MINGW and VS.NET use fstream instead of fstream.h which is deprecated
-	#include <fstream>
-#else
-	// for VC++ 6
-	#include <fstream.h>
 #endif
 
 #include "types.h"

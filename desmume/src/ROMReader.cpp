@@ -16,13 +16,12 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "ROMReader.h"
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdio.h>
 #ifdef HAVE_LIBZZIP
-#include <zzip/zzip.h>
+#	include <zzip/zzip.h>
 #endif
 
 #include "utils/xstring.h"

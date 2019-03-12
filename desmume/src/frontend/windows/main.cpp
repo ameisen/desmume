@@ -19,21 +19,14 @@
 // icon gradient: #f6f6fb to #8080c0
 // RGB(246, 246, 251) to RGB(128, 128, 192)
 
+#include "desmume"
+
 #include "main.h"
 #include "windriver.h"
 
-#include <algorithm>
-#include <string>
-#include <vector>
-
 #include <Winuser.h>
 #include <Winnls.h>
-#include <windowsx.h>
-#include <mmsystem.h>
-#include <shlwapi.h>
-#include <commctrl.h>
-#include <tchar.h>
-#include <stdio.h>
+#include <ddraw.h>
 
 #include <GL/gl.h>
 #include <GL/glext.h>
@@ -81,7 +74,6 @@
 #include "FEX_Interface.h"
 #include "OpenArchive.h"
 #include "utils/xstring.h"
-#include "directx/ddraw.h"
 #include "video.h"
 #include "frontend/modules/osd/agg/agg_osd.h"
 #include "frontend/modules/osd/agg/aggdraw.h"

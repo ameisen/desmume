@@ -20,12 +20,11 @@
 //so that you can test your homebrew games and patches without having to rebuild the ROM and restart it.
 //Q. can it handle resized files?
 
+#include "desmume"
+
 #include "slot1comp_mc.h"
 #include "slot1comp_rom.h"
 #include "slot1comp_protocol.h"
-
-#include <stdio.h>
-#include <string>
 
 #include "../slot1.h"
 #include "../path.h"

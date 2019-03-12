@@ -17,13 +17,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "OGLRender_3_2.h"
+#include "desmume"
 
-#include <stdlib.h>
-#include <string.h>
-#include <algorithm>
-#include <string>
-#include <sstream>
+#include "OGLRender_3_2.h"
 
 #include "utils/bits.h"
 #include "common.h"

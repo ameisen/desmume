@@ -23,12 +23,10 @@
 // 2014-02-06 (rogerman):	Modified for use in DeSmuME by removing C++11 code.
 //							Also add render functions compatible with filter.h.
 
+#include "desmume"
+
 #include "xbrz.h"
 #include "filter.h"
-#include <cassert>
-#include <complex>
-#include <algorithm>
-#include <vector>
 
 #ifdef _MSC_VER
 	#define FORCE_INLINE __forceinline

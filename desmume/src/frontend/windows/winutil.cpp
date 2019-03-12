@@ -15,13 +15,10 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "path.h"
 #include "winutil.h"
-#include <stdio.h>
-#include <string.h>
-#include "Platforms/common.h"
-#include <windef.h>
-#include <ShlObj.h>
 
 
 char IniName[MAX_PATH];

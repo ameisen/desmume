@@ -19,7 +19,7 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "Platforms/common.h"
+#include "desmume"
 
 #include "hotkey.h"
 

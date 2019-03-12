@@ -17,8 +17,8 @@
 
 //windows note: make sure this file gets compiled with _cdecl
 
-#include <algorithm>
-#include <stdio.h>
+#include "desmume"
+
 #include "commandline.h"
 #include "types.h"
 #include "movie.h"

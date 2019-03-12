@@ -37,7 +37,7 @@ The emulation in all the handling of erroneous cases is not perfect, and some ot
 maybe legally configure the paddle differently, which could be rejected here; in which case this code will need finetuning
 */
 
-#include <string.h>
+#include "desmume"
 
 #include "../slot2.h"
 #include "../NDSSystem.h"

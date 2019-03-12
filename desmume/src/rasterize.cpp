@@ -35,27 +35,16 @@
 // * Kingdom Hearts Re:coded -- shadow under Sora
 // * Golden Sun: Dark Dawn -- shadow under the main character
 
+#include "desmume"
+
 #include "rasterize.h"
 
-#include <algorithm>
-#include <assert.h>
-#include <math.h>
-#include <string.h>
-
 #if defined(_MSC_VER) && _MSC_VER == 1600
-#define SLEEP_HACK_2011
-#endif
-
-#ifdef SLEEP_HACK_2011
-#include "Platforms/common.h"
-#endif
-
-#ifndef _MSC_VER 
-#include <stdint.h>
+#	define SLEEP_HACK_2011
 #endif
 
 #ifdef ENABLE_SSE2
-#include <emmintrin.h>
+#	include <emmintrin.h>
 #endif
 
 #include "matrix.h"

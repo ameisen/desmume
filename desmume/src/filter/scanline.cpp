@@ -15,10 +15,10 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "filter.h"
 #include "types.h"
-#include <stdio.h>
-#include <string.h>
 
 extern int scanline_filter_a, scanline_filter_b, scanline_filter_c, scanline_filter_d;
 static int fac_a, fac_b, fac_c, fac_d;

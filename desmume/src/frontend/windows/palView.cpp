@@ -16,9 +16,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "palView.h"
+#include "desmume"
 
-#include <commctrl.h>
+#include "palView.h"
 
 #include "types.h"
 #include "debug.h"

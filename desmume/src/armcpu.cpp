@@ -16,10 +16,7 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
-#include <algorithm>
+#include "desmume"
 
 #include "armcpu.h"
 #include "instructions.h"

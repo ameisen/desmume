@@ -15,9 +15,11 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "sndxa2.h"
-#include "directx/XAudio2.h"
-#include "Platforms/common.h"
+
+#include <xaudio2.h>
 
 #include "types.h"
 #include "windriver.h"

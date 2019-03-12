@@ -15,7 +15,8 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define WIN32_LEAN_AND_MEAN
+#include "desmume"
+
 #include "debug.h"
 
 //in case we ever need glew

@@ -16,12 +16,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "disView.h"
+#include "desmume"
 
-#include <algorithm>
-#include <commctrl.h>
-#include <tchar.h>
-#include <stdio.h>
+#include "disView.h"
 
 #include "MMU.h"
 #include "frontend/modules/Disassembler.h"

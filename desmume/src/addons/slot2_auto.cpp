@@ -15,7 +15,7 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <stdio.h>
+#include "desmume"
 
 #include "../slot2.h"
 

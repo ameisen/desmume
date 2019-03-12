@@ -15,7 +15,8 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <stdio.h>
+#include "desmume"
+
 #include <zlib.h>
 #include "types.h"
 #include "ImageOut.h"

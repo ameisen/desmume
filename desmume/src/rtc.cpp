@@ -19,13 +19,14 @@
 
 // TODO: interrupt handler
 
+#include "desmume"
+
 #include "rtc.h"
 #include "debug.h"
 #include "armcpu.h"
-#include <string.h>
 #include "saves.h"
 #ifdef WIN32
-#include "frontend/windows/main.h"
+#	include "frontend/windows/main.h"
 #endif
 #include "movie.h"
 

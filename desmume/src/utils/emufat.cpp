@@ -25,11 +25,9 @@
 //Copyright (C) 1998 H. Peter Anvin <hpa@zytor.com>
 //Copyright (C) 1998-2005 Roman Hodek <Roman.Hodek@informatik.uni-erlangen.de>
 
+#include <desmume>
+
 #include "emufat.h"
-#include <ctype.h>
-#include <wchar.h>
-#include <wctype.h>
-#include <string.h>
 #include "../emufile.h"
 
 

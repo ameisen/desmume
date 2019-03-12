@@ -15,12 +15,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "recentroms.h"
-
-#include <vector>
-#include <string>
-#include <shlwapi.h>
-
 
 #include "resource.h"
 #include "winutil.h"

@@ -15,6 +15,8 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "slot1comp_mc.h"
 #include "slot1comp_rom.h"
 #include "slot1comp_protocol.h"

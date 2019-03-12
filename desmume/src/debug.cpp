@@ -16,11 +16,10 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "debug.h"
 
-#include <algorithm>
-#include <stdarg.h>
-#include <stdio.h>
 #include "MMU.h"
 #include "armcpu.h"
 #include "instructions.h"

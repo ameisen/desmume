@@ -16,11 +16,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "CWindow.h"
+#include "desmume"
 
-#include "Platforms/common.h"
-#include <windowsx.h>
-#include <commctrl.h>
+#include "CWindow.h"
 
 #include "debug.h"
 

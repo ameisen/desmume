@@ -16,9 +16,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "../slot2.h"
+#include "desmume"
 
-#include <string.h>
+#include "../slot2.h"
 
 #include "../debug.h"
 #include "../NDSSystem.h"

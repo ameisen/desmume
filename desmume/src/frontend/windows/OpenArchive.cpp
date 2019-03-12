@@ -15,17 +15,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "OpenArchive.h"
+#include "desmume"
 
-#include "Platforms/common.h"
-#include <stdio.h>
-#include <errno.h>
-#include <string.h>
-#include <assert.h>
-#include <map>
-#include <vector>
-#include <algorithm>
-#include <mmsystem.h>
+#include "OpenArchive.h"
 
 #include "driver.h"
 

@@ -15,7 +15,8 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <stdlib.h>
+#include <desmume>
+
 #include <retro_inline.h>
 #include "guid.h"
 #include "../types.h"

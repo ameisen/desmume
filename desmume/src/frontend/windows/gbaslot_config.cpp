@@ -15,10 +15,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "gbaslot_config.h"
+#include "desmume"
 
-#include <windowsx.h>
-#include <shlobj.h>
+#include "gbaslot_config.h"
 
 #include "debug.h"
 #include "slot2.h"

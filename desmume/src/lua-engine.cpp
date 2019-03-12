@@ -15,13 +15,11 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "lua-engine.h"
 
-#if defined(WIN32)
-	#include "Platforms/common.h"
-	#include <direct.h>
-	#include <MMSystem.h>
-
+#ifdef WIN32
 	typedef HMENU PlatformMenu;    // hMenu
 	#define MAX_MENU_COUNT (IDC_LUAMENU_RESERVE_END - IDC_LUAMENU_RESERVE_START + 1)
 
@@ -37,14 +35,8 @@
 #endif
 
 #if HAVE_LIBAGG
-#include "frontend/modules/osd/agg/agg_osd.h"
+#	include "frontend/modules/osd/agg/agg_osd.h"
 #endif
-
-#include <assert.h>
-#include <vector>
-#include <map>
-#include <string>
-#include <algorithm>
 
 #include "armcpu.h"
 #include "movie.h"
@@ -58,8 +50,6 @@
 #include "saves.h"
 #include "emufile.h"
 
-using std::min;
-using std::max;
 using std::map;
 using std::vector;
 

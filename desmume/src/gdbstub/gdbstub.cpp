@@ -22,12 +22,9 @@
 	THE SOFTWARE.
 */
 
-#include "gdbstub_internal.h"
+#include "desmume"
 
-#include <errno.h>
-#include <stdlib.h>
-#include <string.h>
-#include <fcntl.h>
+#include "gdbstub_internal.h"
 
 #include <rthreads/rthreads.h>
 #include "../gdbstub.h"
@@ -38,7 +35,6 @@
 
 // For cpu_mutex
 #ifdef HOST_WINDOWS
-#include "Platforms/common.h"
 #else
 #include <pthread.h>
 #if defined HOST_LINUX

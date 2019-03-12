@@ -16,7 +16,8 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <assert.h>
+#include "desmume"
+
 #include "wifi.h"
 #include "armcpu.h"
 #include "NDSSystem.h"
@@ -37,9 +38,6 @@
 	#endif
 	#define PCAP_DEVICE_NAME description
 #else
-	#include <unistd.h>
-	#include <stdlib.h>
-	#include <string.h>
 	#include <arpa/inet.h>
 	#include <sys/socket.h>
 	#define socket_t    int

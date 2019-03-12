@@ -15,12 +15,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "replay.h"
+#include "desmume"
 
-#include "Platforms/common.h"
-#include <io.h>
-#include <fstream>
-#include <time.h>
+#include "replay.h"
 
 #include "types.h"
 #include "movie.h"

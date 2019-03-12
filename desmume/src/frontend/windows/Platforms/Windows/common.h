@@ -11,6 +11,14 @@
 #include <Windows.h>
 #include <commdlg.h>
 #include <Shellapi.h>
+#include <shlwapi.h>
+#include <CommCtrl.h>
+#include <tchar.h>
+#include <ShlObj.h>
+#include <windowsx.h>
+#include <windef.h>
+#include <mmsystem.h>
+#include <direct.h>
 
 namespace Platform {
 	template <typename T = char> using win_cstring = T *;

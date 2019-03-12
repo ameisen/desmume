@@ -15,8 +15,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "fsnitroView.h"
-#include <shlobj.h>
 
 #include "path.h"
 #include "common.h"

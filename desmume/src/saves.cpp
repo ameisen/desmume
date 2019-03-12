@@ -18,16 +18,11 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #ifdef HAVE_LIBZ
-#include <zlib.h>
+#	include <zlib.h>
 #endif
-#include <stack>
-#include <set>
-#include <stdio.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <time.h>
-#include <fstream>
 
 #include "common.h"
 #include "armcpu.h"
@@ -56,7 +51,7 @@
 #include "path.h"
 
 #ifdef HOST_WINDOWS
-#include "frontend/windows/main.h"
+#	include "frontend/windows/main.h"
 #endif
 
 int lastSaveState = 0;		//Keeps track of last savestate used for quick save/load functions

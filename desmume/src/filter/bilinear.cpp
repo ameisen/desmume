@@ -4,6 +4,8 @@
  **	Written: 6/14/00 - JSF
  **/
 
+#include "desmume"
+
 #include "filter.h"
 #include "types.h"
 

@@ -28,6 +28,8 @@
  * do so, delete this exception statement from your version.
  */
 
+#include "desmume"
+
 #include "filter.h"
 #include "interp.h"
 

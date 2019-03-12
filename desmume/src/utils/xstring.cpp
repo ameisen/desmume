@@ -18,7 +18,8 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <string>
+#include <desmume>
+
 #include "encodings/utf.h"
 #include "xstring.h"
 

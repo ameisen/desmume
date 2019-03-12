@@ -16,9 +16,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "colorctrl.h"
-#include <stdio.h>
-#include <malloc.h>
 
 static char szClassName[] = "DeSmuME_ColorCtrl";
 

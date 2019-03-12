@@ -15,12 +15,9 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
+
 #include "aviout.h"
-
-#include <assert.h>
-#include <stdio.h>
-
-#include <string>
 
 #include "debug.h"
 #include "common.h"

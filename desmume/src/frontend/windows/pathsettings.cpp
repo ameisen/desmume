@@ -16,13 +16,8 @@
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "desmume"
 
-#include <windowsx.h>
-#include <shlwapi.h>
-#include <shlobj.h>
-#include <commctrl.h>
-#include <time.h>
-#include <stdlib.h>
 #include "main.h"
 #include "path.h"
 #include "pathsettings.h"
