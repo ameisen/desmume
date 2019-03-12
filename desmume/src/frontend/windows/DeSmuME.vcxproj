@@ -71,11 +71,11 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>desmume</PrecompiledHeaderFile>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">/Zc:__cplusplus /Ob3 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/Zc:__cplusplus /Ob3 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">/Zc:__cplusplus /Ob3 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/Zc:__cplusplus /Ob3 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -105,6 +105,22 @@
       <EnableParallelCodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</EnableParallelCodeGeneration>
       <FloatingPointExceptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</FloatingPointExceptions>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <InlineFunctionExpansion Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'" />
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">true</IntrinsicFunctions>
+      <EnableFiberSafeOptimizations Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">true</EnableFiberSafeOptimizations>
+      <InlineFunctionExpansion Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'" />
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">true</IntrinsicFunctions>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">false</OmitFramePointers>
+      <EnableFiberSafeOptimizations Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">true</EnableFiberSafeOptimizations>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">false</BufferSecurityCheck>
+      <ControlFlowGuard Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">false</ControlFlowGuard>
+      <FloatingPointExceptions Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">false</FloatingPointExceptions>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">false</BufferSecurityCheck>
+      <ControlFlowGuard Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">false</ControlFlowGuard>
+      <FloatingPointExceptions Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">false</FloatingPointExceptions>
+      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">Speed</FavorSizeOrSpeed>
+      <FunctionLevelLinking Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">true</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
@@ -112,6 +128,8 @@
       <EnableCOMDATFolding Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</EnableCOMDATFolding>
       <OptimizeReferences Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</OptimizeReferences>
       <EnableCOMDATFolding Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</EnableCOMDATFolding>
+      <OptimizeReferences Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">true</OptimizeReferences>
+      <OptimizeReferences Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

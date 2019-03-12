@@ -363,29 +363,22 @@ static void OGL_DrawTexture(RECT* srcRects, RECT* dstRects)
 }
 static void OGL_DoDisplay()
 {
-	if (!gldisplay.begin(MainWindow->getHWnd())) return;
+	if _unlikely(!gldisplay.begin(MainWindow->getHWnd())) return;
 
 	//the ds screen fills the texture entirely, so we dont have garbage at edge to worry about,
 	//but we need to make sure this is clamped for when filtering is selected
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-	if (gldisplay.filter)
-	{
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	}
-	else
-	{
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	}
+	const auto displayFilter = _likely(gldisplay.filter) ? GL_LINEAR : GL_NEAREST;
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, displayFilter);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, displayFilter);
 
 	RECT rc;
 	HWND hwnd = MainWindow->getHWnd();
 	GetClientRect(hwnd, &rc);
-	int width = rc.right - rc.left;
-	int height = rc.bottom - rc.top;
+	auto width = rc.right - rc.left;
+	auto height = rc.bottom - rc.top;
 
 	glViewport(0, 0, width, height);
 
@@ -435,11 +428,7 @@ static void OGL_DoDisplay()
 		if (osd) osd->swapScreens = isMainGPUFirst;
 		break;
 	default:
-#ifdef _MSC_VER
-		__assume(0);
-#else
-		__builtin_unreachable();
-#endif
+		_unreachable();
 	}
 
 	//printf("%d,%d %dx%d  -- %d,%d %dx%d\n",
@@ -465,13 +454,13 @@ static void OGL_DoDisplay()
 }
 static void DD_DoDisplay()
 {
-	if (ddraw.surfDescBack.dwWidth != video.rotatedwidth() || ddraw.surfDescBack.dwHeight != video.rotatedheight())
+	if _unlikely(ddraw.surfDescBack.dwWidth != video.rotatedwidth() || ddraw.surfDescBack.dwHeight != video.rotatedheight())
 		ddraw.createBackSurface(video.rotatedwidth(), video.rotatedheight());
 
-	if (!ddraw.lock()) return;
-	char* buffer = (char*)ddraw.surfDescBack.lpSurface;
+	if _unlikely(!ddraw.lock()) return;
+	char* __restrict buffer = (char* __restrict)ddraw.surfDescBack.lpSurface;
 
-	switch (ddraw.surfDescBack.ddpfPixelFormat.dwRGBBitCount)
+	switch (_expect(ddraw.surfDescBack.ddpfPixelFormat.dwRGBBitCount, 32))
 	{
 	case 32:
 		doRotate<u32>(ddraw.surfDescBack.lpSurface);
@@ -520,11 +509,7 @@ static void DD_DoDisplay()
 		if (osd) osd->swapScreens = isMainGPUFirst;
 		break;
 	default:
-#ifdef _MSC_VER
-		__assume(0);
-#else
-		__builtin_unreachable();
-#endif
+		_unreachable();
 	}
 
 	//this code fills in all the undrawn areas
@@ -546,7 +531,7 @@ static void DD_DoDisplay()
 		wr.bottom = std::min(wr.bottom, (LONG)ddraw.surfDescBack.dwHeight);
 		//printf("%d %d %d %d / %d %d %d %d\n",fullScreen.left,fullScreen.top,fullScreen.right,fullScreen.bottom,left,top,right,bottom);
 		//printf("%d %d %d %d / %d %d %d %d\n",MainScreenRect.left,MainScreenRect.top,MainScreenRect.right,MainScreenRect.bottom,SubScreenRect.left,SubScreenRect.top,SubScreenRect.right,SubScreenRect.bottom);
-		if (ddraw.OK())
+		if _likely(ddraw.OK())
 		{
 			DD_FillRect(ddraw.surface.primary, 0, 0, left, top, RGB(255, 0, 0)); //topleft
 			DD_FillRect(ddraw.surface.primary, left, 0, right, top, RGB(128, 0, 0)); //topcenter
@@ -564,11 +549,8 @@ static void DD_DoDisplay()
 		}
 	}
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < video.layout ? 2 : 1; i++)
 	{
-		if (i && video.layout == 2)
-			break;
-
 		if (!ddraw.blt(dstRects[i], srcRects[i])) return;
 	}
 
@@ -618,7 +600,7 @@ void displayThread(void *arg)
 {
 	do
 	{
-		if ((MainWindow == NULL) || IsMinimized(MainWindow->getHWnd()))
+		if _unlikely((MainWindow == NULL) || IsMinimized(MainWindow->getHWnd()))
 		{
 			WaitForSingleObject(display_wakeup_event, INFINITE);
 		}
@@ -631,7 +613,7 @@ void displayThread(void *arg)
 			WaitForSingleObject(display_wakeup_event, 10);
 		}
 
-		if (display_die)
+		if _unlikely(display_die)
 		{
 			break;
 		}
@@ -726,7 +708,7 @@ void DoDisplay()
 
 	// draw hud
 	DoDisplay_DrawHud();
-	if (displayMethod == DISPMETHOD_DDRAW_HW || displayMethod == DISPMETHOD_DDRAW_SW)
+	if _unlikely(displayMethod == DISPMETHOD_DDRAW_HW || displayMethod == DISPMETHOD_DDRAW_SW)
 	{
 		// DirectDraw doesn't support alpha blending, so we must scale and overlay the HUD ourselves.
 		T_AGG_RGBA target((u8*)video.buffer, video.prefilterWidth, video.prefilterHeight, video.prefilterWidth * 4);
@@ -736,7 +718,7 @@ void DoDisplay()
 	//apply user's filter
 	video.filter();
 
-	if (displayMethod == DISPMETHOD_DDRAW_HW || displayMethod == DISPMETHOD_DDRAW_SW)
+	if _unlikely(displayMethod == DISPMETHOD_DDRAW_HW || displayMethod == DISPMETHOD_DDRAW_SW)
 	{
 		gldisplay.kill();
 		DD_DoDisplay();

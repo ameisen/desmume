@@ -719,7 +719,7 @@ protected:
 	OGLTextureUnitID _lastTextureDrawTarget;
 	OGLGeometryFlags _geometryProgramFlags;
 	OGLFogProgramKey _fogProgramKey;
-	std::map<u32, OGLFogShaderID> _fogProgramMap;
+	std::unordered_map<u32, OGLFogShaderID> _fogProgramMap;
 	
 	CACHE_ALIGN OGLRenderStates _pendingRenderStates;
 	
@@ -775,7 +775,7 @@ protected:
 	virtual Render3DError CreateFramebufferOutput8888Program(const size_t outColorIndex, const char *vtxShaderCString, const char *fragShaderCString) = 0;
 	virtual void DestroyFramebufferOutput8888Programs() = 0;
 	
-	virtual Render3DError InitFinalRenderStates(const std::set<std::string> *oglExtensionSet) = 0;
+	virtual Render3DError InitFinalRenderStates(const std::unordered_set<std::string> *oglExtensionSet) = 0;
 	virtual Render3DError InitPostprocessingPrograms(const char *edgeMarkVtxShader,
 													 const char *edgeMarkFragShader,
 													 const char *framebufferOutputVtxShader,
@@ -784,7 +784,7 @@ protected:
 	
 	virtual Render3DError UploadClearImage(const u16 *__restrict colorBuffer, const u32 *__restrict depthBuffer, const u8 *__restrict fogBuffer, const u8 opaquePolyID) = 0;
 	
-	virtual void GetExtensionSet(std::set<std::string> *oglExtensionSet) = 0;
+	virtual void GetExtensionSet(std::unordered_set<std::string> *oglExtensionSet) = 0;
 	virtual void _SetupGeometryShaders(const OGLGeometryFlags flags) = 0;
 	virtual Render3DError EnableVertexAttributes() = 0;
 	virtual Render3DError DisableVertexAttributes() = 0;
@@ -802,7 +802,7 @@ public:
 	
 	virtual Render3DError InitExtensions() = 0;
 	
-	bool IsExtensionPresent(const std::set<std::string> *oglExtensionSet, const std::string extensionName) const;
+	bool IsExtensionPresent(const std::unordered_set<std::string> *oglExtensionSet, const std::string extensionName) const;
 	Render3DError ShaderProgramCreate(GLuint &vtxShaderID,
 									  GLuint &fragShaderID,
 									  GLuint &programID,
@@ -850,7 +850,7 @@ protected:
 	virtual Render3DError CreateFramebufferOutput8888Program(const size_t outColorIndex, const char *vtxShaderCString, const char *fragShaderCString);
 	virtual void DestroyFramebufferOutput8888Programs();
 	
-	virtual Render3DError InitFinalRenderStates(const std::set<std::string> *oglExtensionSet);
+	virtual Render3DError InitFinalRenderStates(const std::unordered_set<std::string> *oglExtensionSet);
 	virtual Render3DError InitPostprocessingPrograms(const char *edgeMarkVtxShader,
 													 const char *edgeMarkFragShader,
 													 const char *framebufferOutputVtxShader,
@@ -859,7 +859,7 @@ protected:
 	
 	virtual Render3DError UploadClearImage(const u16 *__restrict colorBuffer, const u32 *__restrict depthBuffer, const u8 *__restrict fogBuffer, const u8 opaquePolyID);
 	
-	virtual void GetExtensionSet(std::set<std::string> *oglExtensionSet);
+	virtual void GetExtensionSet(std::unordered_set<std::string> *oglExtensionSet);
 	virtual void _SetupGeometryShaders(const OGLGeometryFlags flags);
 	virtual Render3DError EnableVertexAttributes();
 	virtual Render3DError DisableVertexAttributes();
@@ -898,7 +898,7 @@ public:
 class OpenGLRenderer_2_0 : public OpenGLRenderer_1_2
 {
 protected:
-	virtual Render3DError InitFinalRenderStates(const std::set<std::string> *oglExtensionSet);
+	virtual Render3DError InitFinalRenderStates(const std::unordered_set<std::string> *oglExtensionSet);
 	
 	virtual Render3DError EnableVertexAttributes();
 	virtual Render3DError DisableVertexAttributes();

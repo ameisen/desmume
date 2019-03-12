@@ -511,7 +511,7 @@ LRESULT CALLBACK ArchiveFileChooser(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM 
 {
 	RECT r, r2;
 	int dx1, dy1, dx2, dy2;
-	static std::map<int,int> s_listToItemsMap;
+	static std::unordered_map<int,int> s_listToItemsMap;
 
 	switch(uMsg)
 	{

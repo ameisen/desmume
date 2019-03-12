@@ -839,7 +839,7 @@ static int SubWrite(EMUFILE *os, const SFORMAT *sf)
 	u32 acc=0;
 
 #ifdef DEBUG
-	std::set<std::string> keyset;
+	std::unordered_set<std::string> keyset;
 #endif
 
 	const SFORMAT* temp = sf;

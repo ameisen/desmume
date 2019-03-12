@@ -868,7 +868,7 @@ Render3DError OpenGLRenderer_3_2::InitExtensions()
 	Render3DError error = OGLERROR_NOERR;
 	
 	// Get OpenGL extensions
-	std::set<std::string> oglExtensionSet;
+	std::unordered_set<std::string> oglExtensionSet;
 	this->GetExtensionSet(&oglExtensionSet);
 	
 	// Get host GPU device properties
@@ -2021,7 +2021,7 @@ Render3DError OpenGLRenderer_3_2::CreateFramebufferOutput8888Program(const size_
 	return OGLERROR_NOERR;
 }
 
-void OpenGLRenderer_3_2::GetExtensionSet(std::set<std::string> *oglExtensionSet)
+void OpenGLRenderer_3_2::GetExtensionSet(std::unordered_set<std::string> *oglExtensionSet)
 {
 	GLint extensionCount = 0;
 	
@@ -2033,7 +2033,7 @@ void OpenGLRenderer_3_2::GetExtensionSet(std::set<std::string> *oglExtensionSet)
 	}
 }
 
-Render3DError OpenGLRenderer_3_2::InitFinalRenderStates(const std::set<std::string> *oglExtensionSet)
+Render3DError OpenGLRenderer_3_2::InitFinalRenderStates(const std::unordered_set<std::string> *oglExtensionSet)
 {
 	Render3DError error = OpenGLRenderer_2_1::InitFinalRenderStates(oglExtensionSet);
 	if (error != OGLERROR_NOERR)
@@ -2568,7 +2568,7 @@ Render3DError OpenGLRenderer_3_2::PostprocessFramebuffer()
 	
 	if (this->_enableFog)
 	{
-		std::map<u32, OGLFogShaderID>::iterator it = this->_fogProgramMap.find(this->_fogProgramKey.key);
+		std::unordered_map<u32, OGLFogShaderID>::iterator it = this->_fogProgramMap.find(this->_fogProgramKey.key);
 		if (it == this->_fogProgramMap.end())
 		{
 			Render3DError error = this->CreateFogProgram(this->_fogProgramKey, FogVtxShader_150, FogFragShader_150);

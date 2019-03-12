@@ -49,7 +49,7 @@ ASMJIT_API void assertionFailure(const char* file, int line, const char* exp);
 #else
 
 #if !defined(ASMJIT_ASSERT)
-#define ASMJIT_ASSERT(exp) ASMJIT_NOP()
+#define ASMJIT_ASSERT(exp) _assume(exp)
 #endif
 
 #endif // DEBUG

@@ -31,7 +31,7 @@
 
 using
 	std::string,
-	std::map,
+	std::unordered_map,
 	std::pair;
 
 extern CRITICAL_SECTION win_execute_sync;
@@ -217,7 +217,7 @@ private:
 	// directly after use would also destroy the toolbar.
 	// They'll be destroyed when the CToolBar destructor is called.
 	typedef pair<int, HBITMAP> TBitmapPair;
-	typedef map<int, TBitmapPair> TBitmapList;
+	typedef unordered_map<int, TBitmapPair> TBitmapList;
 	TBitmapList hBitmaps;
 
 	bool hidden;

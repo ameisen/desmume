@@ -1323,7 +1323,7 @@ OpenGLRenderer::~OpenGLRenderer()
 	this->ref = NULL;
 }
 
-bool OpenGLRenderer::IsExtensionPresent(const std::set<std::string> *oglExtensionSet, const std::string extensionName) const
+bool OpenGLRenderer::IsExtensionPresent(const std::unordered_set<std::string> *oglExtensionSet, const std::string extensionName) const
 {
 	if (oglExtensionSet == NULL || oglExtensionSet->size() == 0)
 	{
@@ -2518,7 +2518,7 @@ Render3DError OpenGLRenderer_1_2::InitExtensions()
 	Render3DError error = OGLERROR_NOERR;
 	
 	// Get OpenGL extensions
-	std::set<std::string> oglExtensionSet;
+	std::unordered_set<std::string> oglExtensionSet;
 	this->GetExtensionSet(&oglExtensionSet);
 	
 	if (!this->IsExtensionPresent(&oglExtensionSet, "GL_ARB_multitexture"))
@@ -3599,7 +3599,7 @@ void OpenGLRenderer_1_2::DestroyFogProgram(const OGLFogProgramKey fogProgramKey)
 		return;
 	}
 	
-	std::map<u32, OGLFogShaderID>::iterator it = this->_fogProgramMap.find(fogProgramKey.key);
+	std::unordered_map<u32, OGLFogShaderID>::iterator it = this->_fogProgramMap.find(fogProgramKey.key);
 	if (it == this->_fogProgramMap.end())
 	{
 		return;
@@ -3631,7 +3631,7 @@ void OpenGLRenderer_1_2::DestroyFogPrograms()
 	
 	while (this->_fogProgramMap.size() > 0)
 	{
-		std::map<u32, OGLFogShaderID>::iterator it = this->_fogProgramMap.begin();
+		std::unordered_map<u32, OGLFogShaderID>::iterator it = this->_fogProgramMap.begin();
 		OGLFogShaderID shaderID = it->second;
 		
 		glDetachShader(shaderID.program, OGLRef.vertexFogShaderID);
@@ -3827,7 +3827,7 @@ void OpenGLRenderer_1_2::DestroyFramebufferOutput8888Programs()
 	OGLRef.fragmentFramebufferRGBA8888OutputShaderID = 0;
 }
 
-Render3DError OpenGLRenderer_1_2::InitFinalRenderStates(const std::set<std::string> *oglExtensionSet)
+Render3DError OpenGLRenderer_1_2::InitFinalRenderStates(const std::unordered_set<std::string> *oglExtensionSet)
 {
 	OGLRenderRef &OGLRef = *this->ref;
 	
@@ -3963,7 +3963,7 @@ Render3DError OpenGLRenderer_1_2::UploadClearImage(const u16 *__restrict colorBu
 	return OGLERROR_NOERR;
 }
 
-void OpenGLRenderer_1_2::GetExtensionSet(std::set<std::string> *oglExtensionSet)
+void OpenGLRenderer_1_2::GetExtensionSet(std::unordered_set<std::string> *oglExtensionSet)
 {
 	std::string oglExtensionString = std::string((const char *)glGetString(GL_EXTENSIONS));
 	
@@ -4757,7 +4757,7 @@ Render3DError OpenGLRenderer_1_2::PostprocessFramebuffer()
 	
 	if (this->_enableFog)
 	{
-		std::map<u32, OGLFogShaderID>::iterator it = this->_fogProgramMap.find(this->_fogProgramKey.key);
+		std::unordered_map<u32, OGLFogShaderID>::iterator it = this->_fogProgramMap.find(this->_fogProgramKey.key);
 		if (it == this->_fogProgramMap.end())
 		{
 			Render3DError error = this->CreateFogProgram(this->_fogProgramKey, FogVtxShader_100, FogFragShader_100);
@@ -5583,7 +5583,7 @@ Render3DError OpenGLRenderer_1_2::SetFramebufferSize(size_t w, size_t h)
 	return error;
 }
 
-Render3DError OpenGLRenderer_2_0::InitFinalRenderStates(const std::set<std::string> *oglExtensionSet)
+Render3DError OpenGLRenderer_2_0::InitFinalRenderStates(const std::unordered_set<std::string> *oglExtensionSet)
 {
 	OGLRenderRef &OGLRef = *this->ref;
 	

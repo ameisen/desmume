@@ -23,7 +23,7 @@
 
 #include <zlib.h>
 
-static std::map<void *, void *> _alignedPtrList; // Key: Aligned pointer / Value: Original pointer
+static std::unordered_map<void *, void *> _alignedPtrList; // Key: Aligned pointer / Value: Original pointer
 
 // ===============================================================================
 // Message dialogs

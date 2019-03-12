@@ -69,7 +69,7 @@ struct LuaPerWindowInfo {
 	ControlLayoutState layoutState [numControlLayoutInfos];
 	LuaPerWindowInfo() : fileWatcherThread(NULL), started(false), closeOnStop(false), subservient(false), width(405), height(244) {}
 };
-std::map<HWND, LuaPerWindowInfo> LuaWindowInfo;
+std::unordered_map<HWND, LuaPerWindowInfo> LuaWindowInfo;
 static char Lua_Dir[1024]="";
 
 int WINAPI FileSysWatcher (LPVOID arg)
@@ -207,7 +207,7 @@ void Update_Recent_Script(const char* Path, bool dontPutAtTop)
 
 HWND IsScriptFileOpen(const char* Path)
 {
-	for(std::map<HWND, LuaPerWindowInfo>::iterator iter = LuaWindowInfo.begin(); iter != LuaWindowInfo.end(); ++iter)
+	for(std::unordered_map<HWND, LuaPerWindowInfo>::iterator iter = LuaWindowInfo.begin(); iter != LuaWindowInfo.end(); ++iter)
 	{
 		LuaPerWindowInfo& info = iter->second;
 		const char* filename = info.filename.c_str();

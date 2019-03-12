@@ -81,20 +81,20 @@ X86Assembler::~X86Assembler()
 
 void X86Assembler::setVarAt(size_t pos, sysint_t i, uint8_t isUnsigned, uint32_t size)
 {
-  if (size == 1 && !isUnsigned) setByteAt (pos, (int8_t  )i);
-  else if (size == 1 &&  isUnsigned) setByteAt (pos, (uint8_t )i);
-  else if (size == 2 && !isUnsigned) setWordAt (pos, (int16_t )i);
-  else if (size == 2 &&  isUnsigned) setWordAt (pos, (uint16_t)i);
-  else if (size == 4 && !isUnsigned) setDWordAt(pos, (int32_t )i);
-  else if (size == 4 &&  isUnsigned) setDWordAt(pos, (uint32_t)i);
-
+	switch (size) {
+	case 1:
+		isUnsigned ? setByteAt(pos, uint8_t(i)) : setByteAt(pos, int8_t(i)); break;
+	case 2:
+		isUnsigned ? setWordAt(pos, uint16_t(i)) : setWordAt(pos, int16_t(i)); break;
+	case 4:
+		isUnsigned ? setDWordAt(pos, uint32_t(i)) : setDWordAt(pos, int32_t(i)); break;
 #if defined(ASMJIT_X64)
-  else if (size == 8 && !isUnsigned) setQWordAt(pos, (int64_t )i);
-  else if (size == 8 &&  isUnsigned) setQWordAt(pos, (uint64_t)i);
+	case 8:
+		isUnsigned ? setQWordAt(pos, uint64_t(i)) : setQWordAt(pos, int64_t(i)); break;
 #endif // ASMJIT_X64
-
-  else
-    ASMJIT_ASSERT(0);
+	default:
+		ASMJIT_ASSERT(0);
+	}
 }
 
 // ============================================================================

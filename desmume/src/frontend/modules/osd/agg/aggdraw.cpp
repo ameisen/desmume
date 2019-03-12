@@ -61,7 +61,7 @@ THE SOFTWARE.
 
 #include "agg_span_allocator.h"
 
-typedef std::map<std::string, const agg::int8u*> TAgg_Font_Table;
+typedef std::unordered_map<std::string, const agg::int8u*> TAgg_Font_Table;
 static TAgg_Font_Table font_table;
 
 font_type fonts_list[] =

@@ -179,7 +179,7 @@ public:
 
 	int getNumRecords() { return records.size(); }
 
-	class TDictionary : public std::map<std::string,std::string>
+	class TDictionary : public std::unordered_map<std::string,std::string>
 	{
 	public:
 		bool containsKey(std::string key)
@@ -245,7 +245,7 @@ private:
 	void installSram(std::string& val);
 
 	typedef void(MovieData::* ivm)(std::string&);
-	std::map<std::string, ivm> installValueMap;
+	std::unordered_map<std::string, ivm> installValueMap;
 };
 
 extern int currFrameCounter;
