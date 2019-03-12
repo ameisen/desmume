@@ -166,14 +166,11 @@
 
 			<!-- deps config for x64 -->
 			<AdditionalLibraryDirectories Condition="'$(Platform)' == 'x64'">.\zlib128;agg;.libs;.libs\x64</AdditionalLibraryDirectories>
-			<AdditionalDependencies Condition="'$(Platform)' == 'x64'">directx-x64-ddraw-dinput8-dsound-dxerr8-dxguid.lib;zlib-vc8-x64.lib;agg-2.5-x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies Condition="'$(Platform)' == 'x64'">zlib-vc8-x64.lib;agg-2.5-x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
 
 			<!-- deps config for Win32 -->
 			<AdditionalLibraryDirectories Condition="'$(Platform)' == 'Win32'">.\zlib128;agg;.libs;.libs\win32</AdditionalLibraryDirectories>
-			<AdditionalDependencies Condition="'$(Platform)' == 'Win32'">directx-win32-ddraw-dinput8-dsound-dxerr8-dxguid.lib;zlib-vc8-Win32.lib;agg-2.5.lib;%(AdditionalDependencies)</AdditionalDependencies>
-
-			<!-- special deps config for newer VS -->
-			<AdditionalDependencies Label="Configuration" Condition="'$(NDS_VSVER)' &gt;= '14'">legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies Condition="'$(Platform)' == 'Win32'">zlib-vc8-Win32.lib;agg-2.5.lib;%(AdditionalDependencies)</AdditionalDependencies>
 
 			<!-- general deps config -->
 			<AdditionalDependencies>lua51.lib;%(AdditionalDependencies)</AdditionalDependencies>

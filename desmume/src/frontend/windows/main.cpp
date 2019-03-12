@@ -68,7 +68,6 @@
 #include "console.h"
 #include "throttle.h"
 #include "hotkey.h"
-#include "snddx.h"
 #include "sndxa2.h"
 #include "commandline.h"
 #include "FEX_Interface.h"
@@ -413,7 +412,7 @@ extern bool userTouchesScreen;
 
 /*__declspec(thread)*/ bool inFrameBoundary = false;
 
-static int sndcoretype=SNDCORE_DIRECTX;
+static int sndcoretype=SNDCORE_XAUDIO2;
 static int sndbuffersize=DESMUME_SAMPLE_RATE*8/60;
 int sndvolume=100;
 
@@ -426,7 +425,6 @@ bool didGetMaxSamples = false;
 
 SoundInterface_struct *SNDCoreList[] = {
 	&SNDDummy,
-	&SNDDIRECTX,
     &SNDXAUDIO2,
 	NULL
 };
@@ -2347,17 +2345,25 @@ int _main()
 
 	hKeyInputTimer = timeSetEvent (KeyInRepeatMSec, 0, KeyInputTimer, 0, TIME_PERIODIC);
 
-	cur3DCore = GetPrivateProfileInt("3D", "Renderer", GPU3D_DEFAULT, IniName);
-	if(cur3DCore == RENDERID_NULL_SAVED)
-		cur3DCore = RENDERID_NULL;
-	else if(cur3DCore == RENDERID_NULL) // this value shouldn't be saved anymore
-		cur3DCore = GPU3D_DEFAULT;
-
-	if(cmdline.render3d == COMMANDLINE_RENDER3D_NONE) cur3DCore = RENDERID_NULL;
-	if(cmdline.render3d == COMMANDLINE_RENDER3D_SW) cur3DCore = GPU3D_SWRAST;
-	if(cmdline.render3d == COMMANDLINE_RENDER3D_OLDGL) cur3DCore = GPU3D_OPENGL_OLD;
-	if(cmdline.render3d == COMMANDLINE_RENDER3D_GL) cur3DCore = GPU3D_OPENGL_3_2; //no way of forcing it, at least not right now. I dont care.
-	if(cmdline.render3d == COMMANDLINE_RENDER3D_AUTOGL) cur3DCore = GPU3D_OPENGL_3_2; //this will fallback i guess
+	switch (cmdline.render3d) {
+	case COMMANDLINE_RENDER3D_NONE:
+		cur3DCore = RENDERID_NULL; break;
+	case COMMANDLINE_RENDER3D_SW:
+		cur3DCore = GPU3D_SWRAST; break;
+	case COMMANDLINE_RENDER3D_OLDGL:
+		cur3DCore = GPU3D_OPENGL_OLD; break;
+	case COMMANDLINE_RENDER3D_GL:
+	case COMMANDLINE_RENDER3D_AUTOGL:
+		cur3DCore = GPU3D_OPENGL_3_2; break;
+	default:
+		cur3DCore = GetPrivateProfileInt("3D", "Renderer", GPU3D_DEFAULT, IniName);
+		switch (cur3DCore) {
+		case RENDERID_NULL_SAVED:
+			cur3DCore = RENDERID_NULL; break;
+		case RENDERID_NULL:
+			cur3DCore = GPU3D_DEFAULT; break; // this value shouldn't be saved anymore
+		}
+	}
 
 	CommonSettings.GFX3D_HighResolutionInterpolateColor = GetPrivateProfileBool("3D", "HighResolutionInterpolateColor", 1, IniName);
 	CommonSettings.GFX3D_EdgeMark = GetPrivateProfileBool("3D", "EnableEdgeMark", 1, IniName);
@@ -2377,7 +2383,7 @@ int _main()
 	EnableMenuItem (mainMenu, IDM_SUBMITBUGREPORT, MF_GRAYED);
 #endif
 	LOG("Init sound core\n");
-	sndcoretype = (cmdline.disable_sound == 1) ? SNDCORE_DUMMY : GetPrivateProfileInt("Sound","SoundCore2", SNDCORE_DIRECTX, IniName);
+	sndcoretype = (cmdline.disable_sound == 1) ? SNDCORE_DUMMY : GetPrivateProfileInt("Sound","SoundCore2", SNDCORE_XAUDIO2, IniName);
 	sndbuffersize = GetPrivateProfileInt("Sound","SoundBufferSize2", DESMUME_SAMPLE_RATE*8/60, IniName);
 	CommonSettings.spuInterpolationMode = (SPUInterpolationMode)GetPrivateProfileInt("Sound","SPUInterpolation", 2, IniName);
 
@@ -2391,7 +2397,7 @@ int _main()
 	LeaveCriticalSection(&win_execute_sync);
 	if(spu_ret != 0)
 	{
-		MessageBox(MainWindow->getHWnd(),"Unable to initialize DirectSound","Error",MB_OK);
+		MessageBox(MainWindow->getHWnd(),"Unable to initialize XAudio2","Error",MB_OK);
 		sndcoretype = 0;
 	}
 

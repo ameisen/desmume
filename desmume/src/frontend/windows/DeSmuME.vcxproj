@@ -130,6 +130,14 @@
       <EnableCOMDATFolding Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</EnableCOMDATFolding>
       <OptimizeReferences Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">true</OptimizeReferences>
       <OptimizeReferences Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">true</OptimizeReferences>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Ddraw.lib;Dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Dev+|Win32'">Ddraw.lib;Dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Ddraw.lib;Dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|Win32'">Ddraw.lib;Dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Ddraw.lib;Dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Dev+|x64'">Ddraw.lib;Dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Ddraw.lib;Dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release Fastbuild|x64'">Ddraw.lib;Dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -748,7 +756,6 @@
     <ClCompile Include="pathsettings.cpp" />
     <ClCompile Include="recentroms.cpp" />
     <ClCompile Include="replay.cpp" />
-    <ClCompile Include="snddx.cpp" />
     <ClCompile Include="slot1_config.cpp" />
     <ClCompile Include="sndxa2.cpp" />
     <ClCompile Include="throttle.cpp" />
@@ -1020,7 +1027,6 @@
     <ClInclude Include="recentroms.h" />
     <ClInclude Include="replay.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="snddx.h" />
     <ClInclude Include="slot1_config.h" />
     <ClInclude Include="sndxa2.h" />
     <ClInclude Include="throttle.h" />

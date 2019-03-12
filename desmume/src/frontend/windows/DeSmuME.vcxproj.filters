@@ -276,9 +276,6 @@
     <ClCompile Include="replay.cpp">
       <Filter>frontend\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="snddx.cpp">
-      <Filter>frontend\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="slot1_config.cpp">
       <Filter>frontend\Windows</Filter>
     </ClCompile>
@@ -1039,9 +1036,6 @@
       <Filter>frontend\Windows</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>frontend\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="snddx.h">
       <Filter>frontend\Windows</Filter>
     </ClInclude>
     <ClInclude Include="slot1_config.h">
