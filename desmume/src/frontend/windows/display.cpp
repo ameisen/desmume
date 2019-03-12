@@ -277,6 +277,9 @@ template<typename T> static void doRotate(void* dst)
 }
 static void DD_FillRect(LPDIRECTDRAWSURFACE7 surf, int left, int top, int right, int bottom, DWORD color)
 {
+	if ((left == right) | (top == bottom)) {
+		return;
+	}
 	RECT r;
 	SetRect(&r, left, top, right, bottom);
 	DDBLTFX fx;
@@ -410,29 +413,33 @@ static void OGL_DoDisplay()
 	RECT srcRects[2];
 	const bool isMainGPUFirst = (GPU->GetDisplayInfo().engineID[NDSDisplayID_Main] == GPUEngineID_Main);
 
-	if (video.swap == 0)
-	{
+	switch (video.swap) {
+	case 0:
 		srcRects[0] = MainScreenSrcRect;
 		srcRects[1] = SubScreenSrcRect;
 		if (osd) osd->swapScreens = false;
-	}
-	else if (video.swap == 1)
-	{
+		break;
+	case 1:
 		srcRects[0] = SubScreenSrcRect;
 		srcRects[1] = MainScreenSrcRect;
 		if (osd) osd->swapScreens = true;
-	}
-	else if (video.swap == 2)
-	{
+		break;
+	case 2:
 		srcRects[0] = (!isMainGPUFirst) ? SubScreenSrcRect : MainScreenSrcRect;
 		srcRects[1] = (!isMainGPUFirst) ? MainScreenSrcRect : SubScreenSrcRect;
 		if (osd) osd->swapScreens = !isMainGPUFirst;
-	}
-	else if (video.swap == 3)
-	{
+		break;
+	case 3:
 		srcRects[0] = (!isMainGPUFirst) ? MainScreenSrcRect : SubScreenSrcRect;
 		srcRects[1] = (!isMainGPUFirst) ? SubScreenSrcRect : MainScreenSrcRect;
 		if (osd) osd->swapScreens = isMainGPUFirst;
+		break;
+	default:
+#ifdef _MSC_VER
+		__assume(0);
+#else
+		__builtin_unreachable();
+#endif
 	}
 
 	//printf("%d,%d %dx%d  -- %d,%d %dx%d\n",
@@ -491,29 +498,33 @@ static void DD_DoDisplay()
 	RECT* srcRects[2];
 	const bool isMainGPUFirst = (GPU->GetDisplayInfo().engineID[NDSDisplayID_Main] == GPUEngineID_Main);
 
-	if (video.swap == 0)
-	{
+	switch (video.swap) {
+	case 0:
 		srcRects[0] = &MainScreenSrcRect;
 		srcRects[1] = &SubScreenSrcRect;
 		if (osd) osd->swapScreens = false;
-	}
-	else if (video.swap == 1)
-	{
+		break;
+	case 1:
 		srcRects[0] = &SubScreenSrcRect;
 		srcRects[1] = &MainScreenSrcRect;
 		if (osd) osd->swapScreens = true;
-	}
-	else if (video.swap == 2)
-	{
+		break;
+	case 2:
 		srcRects[0] = (!isMainGPUFirst) ? &SubScreenSrcRect : &MainScreenSrcRect;
 		srcRects[1] = (!isMainGPUFirst) ? &MainScreenSrcRect : &SubScreenSrcRect;
 		if (osd) osd->swapScreens = !isMainGPUFirst;
-	}
-	else if (video.swap == 3)
-	{
+		break;
+	case 3:
 		srcRects[0] = (!isMainGPUFirst) ? &MainScreenSrcRect : &SubScreenSrcRect;
 		srcRects[1] = (!isMainGPUFirst) ? &SubScreenSrcRect : &MainScreenSrcRect;
 		if (osd) osd->swapScreens = isMainGPUFirst;
+		break;
+	default:
+#ifdef _MSC_VER
+		__assume(0);
+#else
+		__builtin_unreachable();
+#endif
 	}
 
 	//this code fills in all the undrawn areas
@@ -523,10 +534,16 @@ static void DD_DoDisplay()
 		GetWindowRect(MainWindow->getHWnd(), &wr);
 		RECT r;
 		GetNdsScreenRect(&r);
-		int left = r.left;
-		int top = r.top;
-		int right = r.right;
-		int bottom = r.bottom;
+		// TODO : Find a better fix for this.
+		int left = std::min(r.left, (LONG)ddraw.surfDescBack.dwWidth);
+		int top = std::min(r.top, (LONG)ddraw.surfDescBack.dwHeight);
+		int right = std::min(r.right, (LONG)ddraw.surfDescBack.dwWidth);
+		int bottom = std::min(r.bottom, (LONG)ddraw.surfDescBack.dwHeight);
+
+		wr.left = std::min(wr.left, (LONG)ddraw.surfDescBack.dwWidth);
+		wr.top = std::min(wr.top, (LONG)ddraw.surfDescBack.dwHeight);
+		wr.right = std::min(wr.right, (LONG)ddraw.surfDescBack.dwWidth);
+		wr.bottom = std::min(wr.bottom, (LONG)ddraw.surfDescBack.dwHeight);
 		//printf("%d %d %d %d / %d %d %d %d\n",fullScreen.left,fullScreen.top,fullScreen.right,fullScreen.bottom,left,top,right,bottom);
 		//printf("%d %d %d %d / %d %d %d %d\n",MainScreenRect.left,MainScreenRect.top,MainScreenRect.right,MainScreenRect.bottom,SubScreenRect.left,SubScreenRect.top,SubScreenRect.right,SubScreenRect.bottom);
 		if (ddraw.OK())
