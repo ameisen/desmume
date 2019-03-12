@@ -6,27 +6,11 @@
 	<!-- Release Fastbuild: typical public build with with high performance but a few options which slow down codegen disabled. Good for general development. -->
 	<!-- Dev+: a release build with certain developer features enabled including the GDB stubs -->
 
-	<!-- FIX MSBUILD -->
-	<PropertyGroup>
-		<!-- warning MSB8027: Two or more files with the name of X.cpp will produce outputs to the same location. This can lead to an incorrect build result. -->
-		<IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
-		<!-- http://sedodream.com/PermaLink,guid,a5894bad-f2a1-441a-a5b2-74f16c6cf8aa.aspx -->
-		<VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-	</PropertyGroup>
-
 	<!-- reformat version to be more useful -->
 	<PropertyGroup>
-		<NDS_VSVER Condition="'$(VisualStudioVersion)' == '10.0'">10</NDS_VSVER>
-		<NDS_VSVER Condition="'$(VisualStudioVersion)' == '11.0'">11</NDS_VSVER>
-		<NDS_VSVER Condition="'$(VisualStudioVersion)' == '12.0'">12</NDS_VSVER>
-		<NDS_VSVER Condition="'$(VisualStudioVersion)' == '14.0'">14</NDS_VSVER>
 		<NDS_VSVER Condition="'$(VisualStudioVersion)' == '15.0'">15</NDS_VSVER>
 		<NDS_VSVER Condition="'$(VisualStudioVersion)' == '16.0'">16</NDS_VSVER>
 		<!-- others may not be supported, so lets not list them here -->
-		<NDS_VisualStudioName Condition="'$(NDS_VSVER)' == '10'">VS2010</NDS_VisualStudioName>
-		<NDS_VisualStudioName Condition="'$(NDS_VSVER)' == '11'">VS2012</NDS_VisualStudioName>
-		<NDS_VisualStudioName Condition="'$(NDS_VSVER)' == '12'">VS2013</NDS_VisualStudioName>
-		<NDS_VisualStudioName Condition="'$(NDS_VSVER)' == '14'">VS2015</NDS_VisualStudioName>
 		<NDS_VisualStudioName Condition="'$(NDS_VSVER)' == '15'">VS2017</NDS_VisualStudioName>
 		<NDS_VisualStudioName Condition="'$(NDS_VSVER)' == '16'">VS2019</NDS_VisualStudioName>
 	</PropertyGroup>
@@ -67,12 +51,8 @@
 	<PropertyGroup>
 		<SSE_Level Condition="'$(SSE_Level)' == ''">20</SSE_Level>
 		<AVX_Level Condition="'$(AVX_Level)' == ''">0</AVX_Level>
-		<!-- dont use optimizations the compiler cant handle. this isn't accurate to the compiler capabilities but we're only supporting 2010 and 2015 -->
-		<SSE_Level Condition="'$(NDS_VSVER)' &lt; '14' AND '$(SSE_Level)' &gt; '20'">20</SSE_Level>
 		<!-- validation: x64 14.0 can't handle SSE_Level 1.0 and anyway SSE2 is automatically available -->
 		<SSE_Level Condition="'$(Platform)' == 'x64' AND '$(SSE_Level)' &lt; '20'">20</SSE_Level>
-		<!-- no AVX support on 2010 -->
-		<AVX_Level Condition="'$(NDS_VSVER)' &lt; '14' AND '$(AVX_Level)' != '0'">0</AVX_Level>
 		<!-- AVX implies SSE2 at least -->
 		<SSE_Level Condition="'$(AVX_Level)' != '0' AND '$(SSE_Level)' &lt; '20'">20</SSE_Level>
 	</PropertyGroup>
